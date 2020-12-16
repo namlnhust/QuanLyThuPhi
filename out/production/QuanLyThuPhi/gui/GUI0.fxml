@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller0">
+    <children>
+        <TabPane layoutX="14.0" layoutY="14.0" prefHeight="1052.0" prefWidth="1892.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Khoản phí">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <Label layoutX="693.0" layoutY="604.0" prefHeight="49.0" prefWidth="139.0" style="-fx-background-color: red;" text="Tên phí" />
+                                <TextField fx:id="txfTenPhi" layoutX="869.0" layoutY="604.0" prefHeight="49.0" prefWidth="277.0" />
+                                <TextField fx:id="txfMaPhi" layoutX="208.0" layoutY="604.0" prefHeight="49.0" prefWidth="277.0" />
+                                <Label layoutX="38.0" layoutY="604.0" prefHeight="49.0" prefWidth="139.0" style="-fx-background-color: red;" text="Mã phí" />
+                                <TableView id="tbl_book" fx:id="tableViewKhoanPhi" fixedCellSize="25.0" layoutX="14.0" layoutY="14.0" prefHeight="540.0" prefWidth="1861.0">
+                                    <columns>
+                                        <TableColumn id="maPhi" fx:id="maPhi" prefWidth="108.0" text="Mã phí" />
+                                        <TableColumn id="tenPhi" fx:id="tenPhi" prefWidth="319.0" text="Tên phí" />
+                                        <TableColumn id="loaiPhi" fx:id="loaiPhi" prefWidth="143.0" text="Loại phí" />
+                                        <TableColumn id="soTienCanThu" fx:id="soTienCanThu" prefWidth="160.0" text="Số tiền cần thu" />
+                                        <TableColumn id="soHoDaNop" fx:id="soHoDaNop" prefWidth="136.0" text="Số hộ đã nộp" />
+                                        <TableColumn id="soHoConThieu" fx:id="soHoConThieu" prefWidth="154.0" text="Số hộ còn thiếu" />
+                                        <TableColumn id="tongSoTienDaThu" fx:id="tongSoTienDaThu" prefWidth="172.0" text="Tổng số tiền đã thu" />
+                                        <TableColumn id="soTienConThieu" fx:id="soTienConThieu" prefWidth="177.0" text="Số tiền còn thiếu" />
+                                        <TableColumn id="ngayTao" fx:id="ngayTao" minWidth="0.0" prefWidth="158.0" text="Ngày tạo" />
+                                        <TableColumn id="hanNop" fx:id="hanNop" minWidth="4.0" prefWidth="172.0" text="Hạn nộp" />
+                                        <TableColumn id="capNhatLanCuoi" fx:id="capNhatLanCuoi" prefWidth="162.0" text="Cập nhật lần cuối" />
+                                    </columns>
+                                </TableView>
+                                <TextField fx:id="txfSoTienCanThu" layoutX="1514.0" layoutY="604.0" prefHeight="49.0" prefWidth="277.0" />
+                                <Label layoutX="1338.0" layoutY="604.0" prefHeight="49.0" prefWidth="139.0" style="-fx-background-color: red;" text="Số tiền cần thu" />
+                                <Label layoutX="693.0" layoutY="722.0" prefHeight="49.0" prefWidth="139.0" style="-fx-background-color: red;" text="Hạn nộp" />
+                                <Button layoutX="71.0" layoutY="835.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="215.0" text="Hiển thị" />
+                                <Button layoutX="1603.0" layoutY="835.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="215.0" text="Hủy" />
+                                <Button layoutX="1212.0" layoutY="835.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="215.0" text="Sửa" />
+                                <Button layoutX="437.0" layoutY="835.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="215.0" text="Thêm" />
+                                <Button layoutX="814.0" layoutY="835.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="215.0" text="Xóa" />
+                                <DatePicker fx:id="dpkHanNop" layoutX="869.0" layoutY="722.0" prefHeight="49.0" prefWidth="277.0" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Hộ gia đình">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView id="tbl_book" fx:id="tableViewHoGiaDinh" fixedCellSize="25.0" layoutX="14.0" layoutY="14.0" prefHeight="540.0" prefWidth="1861.0">
+                                    <columns>
+                                        <TableColumn id="maHoGiaDinh" fx:id="maHoGiaDinh" prefWidth="172.0" text="Mã hộ gia đình" />
+                                        <TableColumn id="tenChuHo" fx:id="tenChuHo" prefWidth="411.0" text="Tên chủ hộ" />
+                                        <TableColumn id="diaChi" fx:id="diaChi" prefWidth="599.0" text="Địa chỉ" />
+                                        <TableColumn id="soDienThoai" fx:id="soDienThoai" prefWidth="397.0" text="Số điện thoại" />
+                                        <TableColumn id="soNhanKhau" fx:id="soNhanKhau" prefWidth="281.0" text="Số nhân khẩu" />
+                                    </columns>
+                                </TableView>
+                                <TextField fx:id="txfMaHoGiaDinh" layoutX="243.0" layoutY="604.0" prefHeight="49.0" prefWidth="277.0" />
+                                <Label layoutX="55.0" layoutY="604.0" prefHeight="49.0" prefWidth="139.0" style="-fx-background-color: red;" text="Mã hộ gia đình" />
+                                <Label layoutX="691.0" layoutY="604.0" prefHeight="49.0" prefWidth="139.0" style="-fx-background-color: red;" text="Tên chủ hộ" />
+                                <TextField fx:id="txfTenHoGiaDinh" layoutX="879.0" layoutY="604.0" prefHeight="49.0" prefWidth="277.0" />
+                                <TextField fx:id="txfDiaChi" layoutX="1549.0" layoutY="604.0" prefHeight="49.0" prefWidth="277.0" />
+                                <Label layoutX="1361.0" layoutY="604.0" prefHeight="49.0" prefWidth="139.0" style="-fx-background-color: red;" text="Địa chỉ" />
+                                <Label layoutX="349.0" layoutY="722.0" prefHeight="49.0" prefWidth="139.0" style="-fx-background-color: red;" text="Số điện thoại" />
+                                <TextField fx:id="txfSoDienThoai" layoutX="537.0" layoutY="722.0" prefHeight="49.0" prefWidth="277.0" />
+                                <TextField fx:id="txfSoNhanKhau" layoutX="1206.0" layoutY="722.0" prefHeight="49.0" prefWidth="277.0" />
+                                <Label layoutX="1018.0" layoutY="722.0" prefHeight="49.0" prefWidth="139.0" style="-fx-background-color: red;" text="Số nhân khẩu" />
+                                <Button layoutX="87.0" layoutY="835.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="215.0" text="Hiển thị" />
+                                <Button layoutX="460.0" layoutY="835.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="215.0" text="Thêm" />
+                                <Button layoutX="848.0" layoutY="835.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="215.0" text="Xóa" />
+                                <Button layoutX="1215.0" layoutY="835.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="215.0" text="Sửa" />
+                                <Button layoutX="1579.0" layoutY="835.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="215.0" text="Hủy" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Khoản phí">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <Label layoutX="693.0" layoutY="604.0" prefHeight="49.0" prefWidth="139.0" style="-fx-background-color: red;" text="Mã phí" />
+                                <TextField fx:id="txfMaPhi1" layoutX="869.0" layoutY="604.0" prefHeight="49.0" prefWidth="277.0" />
+                                <TextField fx:id="txfMaHoGiaDinh1" layoutX="208.0" layoutY="604.0" prefHeight="49.0" prefWidth="277.0" />
+                                <Label layoutX="38.0" layoutY="604.0" prefHeight="49.0" prefWidth="139.0" style="-fx-background-color: red;" text="Mã hộ gia đình" />
+                                <TableView id="tbl_book" fx:id="tableViewKhoanPhi" fixedCellSize="25.0" layoutX="14.0" layoutY="14.0" prefHeight="540.0" prefWidth="1861.0">
+                                    <columns>
+                                        <TableColumn id="maHoGiaDinh1" fx:id="maHoGiaDinh1" prefWidth="329.0" text="Mã hộ gia đình" />
+                                        <TableColumn id="maPhi1" fx:id="maPhi1" prefWidth="364.0" text="Mã phí" />
+                                        <TableColumn id="soTienDaNop1" fx:id="soTienDaNop1" prefWidth="384.0" text="Số tiền đã nộp" />
+                                        <TableColumn id="soTienConThieu1" fx:id="soTienConThieu1" prefWidth="386.0" text="Số tiền còn thiếu" />
+                                        <TableColumn id="ngayNop1" fx:id="ngayNop1" prefWidth="397.0" text="Ngày nộp" />
+                                    </columns>
+                                </TableView>
+                                <TextField fx:id="txfSoTienDaNop1" layoutX="1514.0" layoutY="604.0" prefHeight="49.0" prefWidth="277.0" />
+                                <Label layoutX="1338.0" layoutY="604.0" prefHeight="49.0" prefWidth="139.0" style="-fx-background-color: red;" text="Số tiền đã nộp" />
+                                <Label layoutX="693.0" layoutY="722.0" prefHeight="49.0" prefWidth="139.0" style="-fx-background-color: red;" text="Ngày nộp" />
+                                <Button layoutX="71.0" layoutY="835.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="215.0" text="Hiển thị" />
+                                <Button layoutX="1603.0" layoutY="835.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="215.0" text="Hủy" />
+                                <Button layoutX="1212.0" layoutY="835.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="215.0" text="Sửa" />
+                                <Button layoutX="437.0" layoutY="835.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="215.0" text="Thêm" />
+                                <Button layoutX="814.0" layoutY="835.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="215.0" text="Xóa" />
+                                <DatePicker fx:id="dpkNgayNop1" layoutX="869.0" layoutY="722.0" prefHeight="49.0" prefWidth="277.0" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>
