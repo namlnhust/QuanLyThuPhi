@@ -6,6 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.net.URL;
+
 public class GUI extends Application {
     static Stage window;
     static Parent root0;
@@ -19,7 +22,8 @@ public class GUI extends Application {
         try {
             window = primaryStage;
             window.setTitle("Quản lý khoản thu");
-            root0 = FXMLLoader.load(getClass().getResource("\\gui\\GUI0.fxml"));
+            URL url = new File("D:\\Documents\\IntelliJ\\QuanLyThuPhi\\src\\gui\\GUI0.fxml").toURI().toURL();
+            root0 = FXMLLoader.load(url);
             scene0 = new Scene(root0);
             window.setScene(scene0);
             window.show();

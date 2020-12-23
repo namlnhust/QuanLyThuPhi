@@ -295,6 +295,14 @@ public class Controller0 implements Initializable {
         return tmp;
     }
 
+    public void searchHoGiaDinh() {
+
+    }
+
+    public void searchThuPhiHoGiaDinh() {
+
+    }
+
     void clearKhoanPhiInfo() {
         txfMaPhi.setText("");
         txfTenPhi.setText("");
@@ -340,6 +348,7 @@ public class Controller0 implements Initializable {
             while (var5.hasNext()) {
                 ThuPhiHoGiaDinh b = (ThuPhiHoGiaDinh) var5.next();
                 thuPhiHoGiaDinhList.add(b);
+                System.out.println(b.getMaPhi() + "  " + b.getMaHoGiaDinh());
             }
         } catch (SQLException var8) {
             var8.printStackTrace();
