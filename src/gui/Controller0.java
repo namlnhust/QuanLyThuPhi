@@ -4,20 +4,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.*;
 
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class Controller0 implements Initializable {
     @FXML
@@ -79,6 +73,10 @@ public class Controller0 implements Initializable {
     @FXML
     private TextField txfSoTienCanThu = new TextField();
     @FXML
+    private TextField txfLoaiPhi = new TextField();
+    @FXML
+    private TextField khoanPhiKeyword = new TextField();
+    @FXML
     private DatePicker dpkHanNop = new DatePicker();
 
     @FXML
@@ -91,6 +89,8 @@ public class Controller0 implements Initializable {
     private TextField txfSoDienThoai = new TextField();
     @FXML
     private TextField txfSoNhanKhau = new TextField();
+    @FXML
+    private TextField hoGiaDinhKeyword = new TextField();
 
     @FXML
     private TextField txfMaHoGiaDinh1 = new TextField();
@@ -99,58 +99,70 @@ public class Controller0 implements Initializable {
     @FXML
     private TextField txfSoTienDaNop1 = new TextField();
     @FXML
+    private TextField thuPhiHoGiaDinhKeyword = new TextField();
+    @FXML
     private DatePicker dpkNgayNop1 = new DatePicker();
 
     public Controller0() {
+    }
+
+    void setAlert(String mess) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Thông báo");
+        alert.setHeaderText(null);
+        alert.setContentText(mess);
+        alert.showAndWait();
+    }
+
+    boolean setConfirm(String mess) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Xác nhận");
+        alert.setHeaderText(null);
+        alert.setContentText(mess);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK)
+            return true;
+        else
+            return false;
     }
 
     private ArrayList<KhoanPhi> danhSachKhoanPhi;
     private ObservableList<KhoanPhi> khoanPhiList = FXCollections.observableArrayList();
     private QuanLyKhoanPhi quanLyKhoanPhi = new QuanLyKhoanPhi();
     private KhoanPhi khoanPhiChinh = new KhoanPhi();
+    private ArrayList<KhoanPhi> khoanPhiSearchList = new ArrayList<>();
 
     private ArrayList<HoGiaDinh> danhSachHoGiaDinh;
     private ObservableList<HoGiaDinh> hoGiaDinhList = FXCollections.observableArrayList();
     private QuanLyHoGiaDinh quanLyHoGiaDinh = new QuanLyHoGiaDinh();
     private HoGiaDinh hoGiaDinhChinh = new HoGiaDinh();
 
-    private ArrayList<HoGiaDinh> danhSachThuPhiHoGiaDinh;
+    private ArrayList<ThuPhiHoGiaDinh> danhSachThuPhiHoGiaDinh;
     private ObservableList<ThuPhiHoGiaDinh> thuPhiHoGiaDinhList = FXCollections.observableArrayList();
     private QuanLyThuPhiHoGiaDinh quanLyThuPhiHoGiaDinh = new QuanLyThuPhiHoGiaDinh();
     private ThuPhiHoGiaDinh ThuPhiHoGiaDinhChinh = new ThuPhiHoGiaDinh();
 
 
-    public void search() {
+    public void searchKhoanPhi() {
         khoanPhiSearchList.clear();
-        String keyword = bookKeyword.getText();
-        for (int i = 0; i < bookList.size(); i++) {
-            Book tmp = bookList.get(i);
-            if (tmp.getMaSach().contains(keyword) || tmp.getTenSach().contains(keyword)
-                    || tmp.getTacGia().contains(keyword) || tmp.getNhaXB().contains(keyword)
-                    || String.valueOf(tmp.getNamXB()).contains(keyword)
-                    || String.valueOf(tmp.getDonGia()).contains(keyword)
-                    || tmp.getGioiThieu().contains(keyword))
-                bookSearchList.add(tmp);
+        String keyword = khoanPhiKeyword.getText();
+        for (int i = 0; i < khoanPhiList.size(); i++) {
+            KhoanPhi tmp = khoanPhiList.get(i);
+            if (tmp.getMaPhi().contains(keyword) || tmp.getTenPhi().contains(keyword)
+                    || tmp.getLoaiPhi().contains(keyword))
+                khoanPhiSearchList.add(tmp);
         }
-        if (bookSearchList.isEmpty()) {
+        if (khoanPhiSearchList.isEmpty()) {
             (new Controller0()).setAlert("Không tìm thấy kết quả nào!");
-            updateBookTable();
+            updateKhoanPhiTable();
         } else {
-            Collections.sort(bookSearchList);
-            maSach.setCellValueFactory(new PropertyValueFactory("maSach"));
-            tenSach.setCellValueFactory(new PropertyValueFactory("tenSach"));
-            tacGia.setCellValueFactory(new PropertyValueFactory("tacGia"));
-            nhaXB.setCellValueFactory(new PropertyValueFactory("nhaXB"));
-            namXB.setCellValueFactory(new PropertyValueFactory("namXB"));
-            donGia.setCellValueFactory(new PropertyValueFactory("donGia"));
-            gioiThieu.setCellValueFactory(new PropertyValueFactory("gioiThieu"));
-            tableViewBook.setItems(this.bookSearchList);
+            updateKhoanPhiTable();
         }
-        bookKeyword.setText("");
+        khoanPhiKeyword.setText("");
     }
 
     public void themKhoanPhi() {
-        KhoanPhi tmp = getBookInfo();
+        KhoanPhi tmp = getKhoanPhi();
         if (quanLyKhoanPhi.addKhoanPhi(tmp)) {
             khoanPhiList.add(tmp);
             updateKhoanPhiTable();
@@ -174,16 +186,16 @@ public class Controller0 implements Initializable {
             (new Controller0()).setAlert("Sửa thất bại");
     }
 
-    public void deleteBook() {
+    public void deleteKhoanPhi() {
         boolean choice = (new Controller0()).setConfirm("Bạn có chắc chắn muốn xóa không?");
         if (choice) {
             if (quanLyKhoanPhi.deleteKhoanPhi(khoanPhiChinh)) {
-                for (int i = 0; i < bookList.size(); i++) {
-                    if (bookList.get(i).getMaSach().equals(mainBook.getMaSach()))
-                        bookList.remove(i);
+                for (int i = 0; i < khoanPhiList.size(); i++) {
+                    if (khoanPhiList.get(i).getMaPhi().equals(khoanPhiChinh.getMaPhi()))
+                        khoanPhiList.remove(i);
                 }
-                updateBookTable();
-                clearBookInfo();
+                updateKhoanPhiTable();
+                clearKhoanPhiInfo();
                 (new Controller0()).setAlert("Xóa thành công!");
             } else
                 (new Controller0()).setAlert("Xóa thất bại! Mời kiểm tra lại!");
@@ -260,23 +272,37 @@ public class Controller0 implements Initializable {
         tableViewThuPhiHoGiaDinh.setItems(this.thuPhiHoGiaDinhList);
     }
 
-//    KhoanPhi getKhoanPhi() {
-//        String ma_phi = txfMaPhi.getText();
-//        String ten_phi = txfTenPhi.getText();
-//        Integer so_tien_can_thu = Integer.parseInt(txfSoTienCanThu.getText());
-//        LocalDate han_nop = dpkHanNop.getValue();
-//        KhoanPhi tmp = new KhoanPhi(ma_sach, ten_sach, tac_gia, nha_xuat_ban, nam_xuat_ban, don_gia, gioi_thieu);
-//        updateBookTable();
-//        return tmp;
-//    }
+    KhoanPhi getKhoanPhi() {
+        String ma_phi = txfMaPhi.getText();
+        String ten_phi = txfTenPhi.getText();
+        String loai_phi = txfLoaiPhi.getText();
+        Integer so_tien_can_thu = Integer.parseInt(txfSoTienCanThu.getText());
+        LocalDate han_nop = dpkHanNop.getValue();
+        int count1 = 0, count2 = 0, count3 = 0, count4 = 0;
+        int n1 = thuPhiHoGiaDinhList.size();
+        for (int i = 0; i < n1; i++) {
+            ThuPhiHoGiaDinh tp = thuPhiHoGiaDinhList.get(i);
+            if (tp.getMaPhi().equals(ma_phi)) {
+                count3 += tp.getSoTienDaNop();
+                count4 += tp.getSoTienConThieu();
+                if (tp.getSoTienConThieu() == 0 && tp.getSoTienDaNop() > 0) count1++;
+                if (tp.getSoTienConThieu() > 0) count2++;
+                break;
+            }
+        }
+        KhoanPhi tmp = new KhoanPhi(ma_phi, ten_phi, loai_phi, so_tien_can_thu, count1, count2, count3, count4, LocalDate.now(), han_nop, LocalDate.now());
+        updateKhoanPhiTable();
+        return tmp;
+    }
 
-//    void clearKhoanPhiInfo() {
-//        txfMaPhi.setText("");
-//        txfTenPhi.setText("");
-//        txfSoTienCanThu.setText("");
-//        dpkHanNop.setValue(LocalDate.now());
-//        updateKhoanPhiTable();
-//    }
+    void clearKhoanPhiInfo() {
+        txfMaPhi.setText("");
+        txfTenPhi.setText("");
+        txfSoTienCanThu.setText("");
+        txfLoaiPhi.setText("");
+        dpkHanNop.setValue(LocalDate.now());
+        updateKhoanPhiTable();
+    }
 
     public void initialize(URL location, ResourceBundle resources) {
         Iterator var3;
