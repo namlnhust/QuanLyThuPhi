@@ -31,4 +31,47 @@ public class QuanLyThuPhiHoGiaDinh {
         }
         return selThuPhiHoGiaDinhList;
     }
+    
+    
+    public boolean addThuPhiHoGiaDinh(ThuPhiHoGiaDinh tmp) {
+		try {
+			Statement stm = this.cnn.createStatement();
+			String selQuery = "insert into Thu_phi_ho_gia_dinh values('" + tmp.getMaHoGiaDinh() + "', '" + tmp.getMaPhi() + "', "
+					+ String.valueOf(tmp.getSoTienDaNop()) + ", " + String.valueOf(tmp.getSoTienConThieu()) + ", '" + tmp.getNgayNop()
+					+ "')";
+			stm.execute(selQuery);
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+	}
+    
+    public boolean deleteThuPhiHoGiaDinh(ThuPhiHoGiaDinh tmp) {
+		try {
+			Statement stm = this.cnn.createStatement();
+			String selQuery = "delete from Thu_phi_ho_gia_dinh where Ma_ho='"+tmp.getMaHoGiaDinh()+"' and Ma_Phi='"+tmp.getMaPhi()+"'";
+			stm.execute(selQuery);
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+	}
+    
+    public boolean updateThuPhiHoGiaDinh(ThuPhiHoGiaDinh tmp) {
+		try {
+			Statement stm = this.cnn.createStatement();
+			String selQuery = "update Thu_phi_ho_gia_dinh set Ma_ho='" + tmp.getMaHoGiaDinh() + "', Ma_Phi=N'" + tmp.getMaPhi() + "', So_tien_da_nop="
+					+ String.valueOf(tmp.getSoTienDaNop()) + ", So_tien_con_thieu=" + String.valueOf(tmp.getSoTienConThieu()) + ", Ngay_nop='" + tmp.getNgayNop()
+					+ "'";
+			stm.execute(selQuery);
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+	}
+    
+    
 }
