@@ -11,7 +11,7 @@ public class QuanLyKhoanPhi {
     private DBConnection dbConnection = new DBConnection();
     public Connection cnn;
     private QuanLyHoGiaDinh quanLyHoGiaDinh = new QuanLyHoGiaDinh();
-    private ArrayList<HoGiaDinh> hoGiaDinhList = new ArrayList();
+    private ArrayList<HoGiaDinh> hoGiaDinhList = new ArrayList<>();
 
     public QuanLyKhoanPhi() {
         this.cnn = this.dbConnection.getConnection();
@@ -21,9 +21,8 @@ public class QuanLyKhoanPhi {
         Statement stm = this.cnn.createStatement();
         String selQuery = "SELECT * FROM KhoanPhi";
         ResultSet selSet = stm.executeQuery(selQuery);
-        ArrayList selKhoanPhiList = new ArrayList();
+        ArrayList<KhoanPhi> selKhoanPhiList = new ArrayList<>();
         hoGiaDinhList = quanLyHoGiaDinh.selectHoGiaDinh();
-        int tongSoHoGiaDinh = hoGiaDinhList.size();
         while (selSet.next()) {
             String maPhi = selSet.getString("Ma_Phi");
             String tenPhi = selSet.getString("Ten_Phi");
@@ -40,5 +39,27 @@ public class QuanLyKhoanPhi {
             selKhoanPhiList.add(b);
         }
         return selKhoanPhiList;
+    }
+    
+    // Insert into table KhoanPhi tmp, return true/false
+    // Try catch
+    public boolean addKhoanPhi(KhoanPhi tmp) {
+    	try {
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+    }
+    
+    // Delete KhoanPhi tmp WHERE MaPhi=tmp.getMaPhi(), return true/false
+    // Try catch
+    public boolean deleteKhoanPhi(KhoanPhi tmp) {
+    	try {
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
     }
 }

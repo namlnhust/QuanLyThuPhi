@@ -14,11 +14,12 @@ public class GUI extends Application {
     public GUI() {
     };
 
+    @Override
     public void start(Stage primaryStage) {
         try {
             window = primaryStage;
             window.setTitle("Quản lý khoản thu");
-            root0 = FXMLLoader.load(this.getClass().getResource("/gui/GUI0.fxml"));
+            root0 = FXMLLoader.load(getClass().getResource("\\gui\\GUI0.fxml"));
             scene0 = new Scene(root0);
             window.setScene(scene0);
             window.show();

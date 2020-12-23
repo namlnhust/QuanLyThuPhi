@@ -18,7 +18,7 @@ public class QuanLyHoGiaDinh {
         Statement stm = this.cnn.createStatement();
         String selQuery = "SELECT * FROM ho_gia_dinh";
         ResultSet selSet = stm.executeQuery(selQuery);
-        ArrayList selHoGiaDinhList = new ArrayList();
+        ArrayList<HoGiaDinh> selHoGiaDinhList = new ArrayList<HoGiaDinh>();
         while (selSet.next()) {
             String maHoGiaDinh = selSet.getString("Ma_ho");
             String tenChuHo = selSet.getString("Ten_chu_ho");

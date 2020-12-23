@@ -120,80 +120,79 @@ public class Controller0 implements Initializable {
     private ThuPhiHoGiaDinh ThuPhiHoGiaDinhChinh = new ThuPhiHoGiaDinh();
 
 
-//    public void search() {
-//        bookSearchList.clear();
-//        String keyword = bookKeyword.getText();
-//        for (int i = 0; i < bookList.size(); i++) {
-//            Book tmp = bookList.get(i);
-//            if (tmp.getMaSach().contains(keyword) || tmp.getTenSach().contains(keyword)
-//                    || tmp.getTacGia().contains(keyword) || tmp.getNhaXB().contains(keyword)
-//                    || String.valueOf(tmp.getNamXB()).contains(keyword)
-//                    || String.valueOf(tmp.getDonGia()).contains(keyword)
-//                    || tmp.getGioiThieu().contains(keyword))
-//                bookSearchList.add(tmp);
-//        }
-//        if (bookSearchList.isEmpty()) {
-//            (new Controller0()).setAlert("Không tìm thấy kết quả nào!");
-//            updateBookTable();
-//        } else {
-//            Collections.sort(bookSearchList);
-//            maSach.setCellValueFactory(new PropertyValueFactory("maSach"));
-//            tenSach.setCellValueFactory(new PropertyValueFactory("tenSach"));
-//            tacGia.setCellValueFactory(new PropertyValueFactory("tacGia"));
-//            nhaXB.setCellValueFactory(new PropertyValueFactory("nhaXB"));
-//            namXB.setCellValueFactory(new PropertyValueFactory("namXB"));
-//            donGia.setCellValueFactory(new PropertyValueFactory("donGia"));
-//            gioiThieu.setCellValueFactory(new PropertyValueFactory("gioiThieu"));
-//            tableViewBook.setItems(this.bookSearchList);
-//        }
-//        bookKeyword.setText("");
-//    }
+    public void search() {
+        khoanPhiSearchList.clear();
+        String keyword = bookKeyword.getText();
+        for (int i = 0; i < bookList.size(); i++) {
+            Book tmp = bookList.get(i);
+            if (tmp.getMaSach().contains(keyword) || tmp.getTenSach().contains(keyword)
+                    || tmp.getTacGia().contains(keyword) || tmp.getNhaXB().contains(keyword)
+                    || String.valueOf(tmp.getNamXB()).contains(keyword)
+                    || String.valueOf(tmp.getDonGia()).contains(keyword)
+                    || tmp.getGioiThieu().contains(keyword))
+                bookSearchList.add(tmp);
+        }
+        if (bookSearchList.isEmpty()) {
+            (new Controller0()).setAlert("Không tìm thấy kết quả nào!");
+            updateBookTable();
+        } else {
+            Collections.sort(bookSearchList);
+            maSach.setCellValueFactory(new PropertyValueFactory("maSach"));
+            tenSach.setCellValueFactory(new PropertyValueFactory("tenSach"));
+            tacGia.setCellValueFactory(new PropertyValueFactory("tacGia"));
+            nhaXB.setCellValueFactory(new PropertyValueFactory("nhaXB"));
+            namXB.setCellValueFactory(new PropertyValueFactory("namXB"));
+            donGia.setCellValueFactory(new PropertyValueFactory("donGia"));
+            gioiThieu.setCellValueFactory(new PropertyValueFactory("gioiThieu"));
+            tableViewBook.setItems(this.bookSearchList);
+        }
+        bookKeyword.setText("");
+    }
 
-//    public void themKhoanPhi() {
-//        KhoanPhi tmp = getBookInfo();
-//        if (bookManager.addBook(tmp)) {
-//            bookList.add(tmp);
-//            tableViewBook.setItems(bookList);
-//            updateBookTable();
-//            clearBookInfo();
-//            (new Controller0()).setAlert("Thêm thành công!");
-//        } else
-//            (new Controller0()).setAlert("Thêm thất bại! Mời kiểm tra lại dữ liệu!");
-//    }
+    public void themKhoanPhi() {
+        KhoanPhi tmp = getBookInfo();
+        if (quanLyKhoanPhi.addKhoanPhi(tmp)) {
+            khoanPhiList.add(tmp);
+            updateKhoanPhiTable();
+            clearKhoanPhiInfo();
+            (new Controller0()).setAlert("Thêm thành công!");
+        } else
+            (new Controller0()).setAlert("Thêm thất bại! Mời kiểm tra lại dữ liệu!");
+    }
 
-//    public void updateBook() {
-//        Book tmp = getBookInfo();
-//        if (bookManager.updateBook(tmp)) {
-//            int i = 0;
-//            while (!bookList.get(i).getMaSach().equals(tmp.getMaSach()))
-//                i++;
-//            bookList.set(i, tmp);
-//            updateBookTable();
-//            clearBookInfo();
-//            (new Controller0()).setAlert("Sửa thành công!");
-//        } else
-//            (new Controller0()).setAlert("Sửa thất bại");
-//    }
+    public void updateKhoanPhi() {
+        KhoanPhi tmp = getKhoanPhi();
+        if (quanLyKhoanPhi.updateKhoanPhi(tmp)) {
+            int i = 0;
+            while (!khoanPhiList.get(i).getMaPhi().equals(tmp.getMaPhi()))
+                i++;
+            khoanPhiList.set(i, tmp);
+            updateKhoanPhiTable();
+            clearKhoanPhiInfo();
+            (new Controller0()).setAlert("Sửa thành công!");
+        } else
+            (new Controller0()).setAlert("Sửa thất bại");
+    }
 
-//    public void deleteBook() {
-//        boolean choice = (new Controller0()).setConfirm("Bạn có chắc chắn muốn xóa không?");
-//        if (choice) {
-//            if (bookManager.deleteBook(mainBook)) {
-//                for (int i = 0; i < bookList.size(); i++) {
-//                    if (bookList.get(i).getMaSach().equals(mainBook.getMaSach()))
-//                        bookList.remove(i);
-//                }
-//                updateBookTable();
-//                clearBookInfo();
-//                (new Controller0()).setAlert("Xóa thành công!");
-//            } else
-//                (new Controller0()).setAlert("Xóa thất bại! Mời kiểm tra lại!");
-//        }
-//    }
+    public void deleteBook() {
+        boolean choice = (new Controller0()).setConfirm("Bạn có chắc chắn muốn xóa không?");
+        if (choice) {
+            if (quanLyKhoanPhi.deleteKhoanPhi(khoanPhiChinh)) {
+                for (int i = 0; i < bookList.size(); i++) {
+                    if (bookList.get(i).getMaSach().equals(mainBook.getMaSach()))
+                        bookList.remove(i);
+                }
+                updateBookTable();
+                clearBookInfo();
+                (new Controller0()).setAlert("Xóa thành công!");
+            } else
+                (new Controller0()).setAlert("Xóa thất bại! Mời kiểm tra lại!");
+        }
+    }
 
-//    public void cancelBook() {
-//        clearBookInfo();
-//    }
+    public void cancelKhoanPhi() {
+        clearKhoanPhiInfo();
+    }
 
     public void getSelectedKhoanPhi() {
         tableViewKhoanPhi.setOnMouseClicked(e -> {
@@ -322,61 +321,4 @@ public class Controller0 implements Initializable {
         updateThuPhiHoGiaDinhTable();
         getSelectedThuPhiHoGiaDinh();
     }
-
-//    public void getBookFileURL() {
-//        File selectedFile = fileChooser.showOpenDialog(GUI.window);
-//        bookManager.bookFileURL = selectedFile.getAbsolutePath();
-//        insertBookByFile();
-//    }
-
-//    public void insertBookByFile() {
-//        ArrayList<Book> insertList = bookManager.insertBookByFile();
-//        boolean res = true;
-//        int n = insertList.size();
-//        for (int i = 0; i < n; i++) {
-//            Book b = insertList.get(i);
-//            res = res && bookManager.addBook(b);
-//            if (res == false) {
-//                (new Controller0()).setAlert("Nhập file thất bại!");
-//                return;
-//            }
-//            bookList.add(b);
-//            tableViewBook.setItems(bookList);
-//            updateBookTable();
-//        }
-//        if (res == true)
-//            (new Controller0()).setAlert("Nhập file thành công!");
-//        else
-//            (new Controller0()).setAlert("Nhập file thất bại!");
-//    }
-
-//    public void exportListingFile() {
-//        try {
-//            File bookDataFile = new File(bookManager.saverURL + "//bookData.txt");
-//            FileWriter bookDataWriter = new FileWriter(bookDataFile.getAbsolutePath());
-//            bookDataWriter.write("-- Thống kê các loại sách trong thư viện --\n");
-//            bookDataWriter.write("Mã sách\tTên sách\tTác giả\tNhà xuất bản\tNăm xuất bản\tĐơn giá\tGiới thiệu\n");
-//            int n = bookList.size();
-//            for (int i = 0; i < n; i++) {
-//                bookDataWriter.write(bookList.get(i).getMaSach() + "\t" + bookList.get(i).getTenSach() + "\t"
-//                        + bookList.get(i).getTacGia() + "\t" + bookList.get(i).getNhaXB() + "\t"
-//                        + bookList.get(i).getNamXB() + "\t" + bookList.get(i).getDonGia() + "\t"
-//                        + bookList.get(i).getGioiThieu() + "\n");
-//            }
-//            bookDataWriter.close();
-//            (new Controller0()).setAlert("Xuất dữ liệu thành công!");
-//        } catch (IOException e) {
-//            (new Controller0()).setAlert("Xuất dữ liệu thất bại!");
-//            e.printStackTrace();
-//        }
-//    }
-
-//    public void listData() {
-//        boolean sel = (new Controller0()).setConfirm("Chọn nơi lưu!");
-//        if (sel) {
-//            File selectedDirectory = directoryChooser.showDialog(GUI.window);
-//            bookManager.saverURL = selectedDirectory.getAbsolutePath();
-//            exportListingFile();
-//        }
-//    }
 }

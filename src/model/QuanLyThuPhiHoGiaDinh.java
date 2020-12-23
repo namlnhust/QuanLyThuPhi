@@ -15,11 +15,11 @@ public class QuanLyThuPhiHoGiaDinh {
         this.cnn = this.dbConnection.getConnection();
     }
 
-    public ArrayList<HoGiaDinh> selectThuPhiHoGiaDinh() throws SQLException {
+    public ArrayList<ThuPhiHoGiaDinh> selectThuPhiHoGiaDinh() throws SQLException {
         Statement stm = this.cnn.createStatement();
         String selQuery = "SELECT * FROM Thu_phi_ho_gia_dinh";
         ResultSet selSet = stm.executeQuery(selQuery);
-        ArrayList selThuPhiHoGiaDinhList = new ArrayList();
+        ArrayList<ThuPhiHoGiaDinh> selThuPhiHoGiaDinhList = new ArrayList<>();
         while (selSet.next()) {
             String maHoGiaDinh1 = selSet.getString("Ma_ho");
             String maPhi1 = selSet.getString("Ma_Phi");

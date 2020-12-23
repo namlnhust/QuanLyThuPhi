@@ -1,6 +1,6 @@
 package model;
 
-public class HoGiaDinh  implements Comparable<HoGiaDinh> {
+public class HoGiaDinh implements Comparable<HoGiaDinh> {
     private String maHoGiaDinh;
     private String tenChuHo;
     private String diaChi;
