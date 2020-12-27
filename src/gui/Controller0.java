@@ -127,6 +127,19 @@ public class Controller0 implements Initializable {
     }
 
     private ArrayList<KhoanPhi> danhSachKhoanPhi;
+
+    public ObservableList<KhoanPhi> getKhoanPhiList() {
+        return khoanPhiList;
+    }
+
+    public ObservableList<HoGiaDinh> getHoGiaDinhList() {
+        return hoGiaDinhList;
+    }
+
+    public ObservableList<ThuPhiHoGiaDinh> getThuPhiHoGiaDinhList() {
+        return thuPhiHoGiaDinhList;
+    }
+
     private ObservableList<KhoanPhi> khoanPhiList = FXCollections.observableArrayList();
     private QuanLyKhoanPhi quanLyKhoanPhi = new QuanLyKhoanPhi();
     private KhoanPhi khoanPhiChinh = new KhoanPhi();
@@ -150,19 +163,19 @@ public class Controller0 implements Initializable {
         String loai_phi = txfLoaiPhi.getText();
         Integer so_tien_can_thu = Integer.parseInt(txfSoTienCanThu.getText());
         LocalDate han_nop = dpkHanNop.getValue();
-        int count1 = 0, count2 = 0, count3 = 0, count4 = 0;
+        int so_ho_da_nop = 0, so_ho_con_thieu = 0, tong_so_tien_da_thu = 0, so_tien_con_thieu = 0;
         int n1 = thuPhiHoGiaDinhList.size();
         for (int i = 0; i < n1; i++) {
             ThuPhiHoGiaDinh tp = thuPhiHoGiaDinhList.get(i);
             if (tp.getMaPhi().equals(ma_phi)) {
-                count3 += tp.getSoTienDaNop();
-                count4 += tp.getSoTienConThieu();
-                if (tp.getSoTienConThieu() == 0 && tp.getSoTienDaNop() > 0) count1++;
-                if (tp.getSoTienConThieu() > 0) count2++;
+                tong_so_tien_da_thu += tp.getSoTienDaNop();
+                so_tien_con_thieu += tp.getSoTienConThieu();
+                if (tp.getSoTienConThieu() == 0 && tp.getSoTienDaNop() > 0) so_ho_da_nop++;
+                if (tp.getSoTienConThieu() > 0) so_ho_con_thieu++;
                 break;
             }
         }
-        KhoanPhi tmp = new KhoanPhi(ma_phi, ten_phi, loai_phi, so_tien_can_thu, count1, count2, count3, count4, LocalDate.now(), han_nop, LocalDate.now());
+        KhoanPhi tmp = new KhoanPhi(ma_phi, ten_phi, loai_phi, so_tien_can_thu, so_ho_da_nop, so_ho_con_thieu, tong_so_tien_da_thu, so_tien_con_thieu, LocalDate.now(), han_nop, LocalDate.now());
         updateKhoanPhiTable();
         return tmp;
     }
@@ -314,12 +327,20 @@ public class Controller0 implements Initializable {
     }
 
     public ThuPhiHoGiaDinh getThuPhiHoGiaDinh() {
-
-//        String ma_ho_1 = txfMaHoGiaDinh1.getText();
-//        String ma_phi_1 = txfMaPhi1.getText();
-//        Integer so_tien_da_nop = Integer.parseInt(txfSoTienDaNop1.getText());
-//        Integer so_tien_con_thieu =
-        ThuPhiHoGiaDinh tmp = new ThuPhiHoGiaDinh();
+        String ma_ho_1 = txfMaHoGiaDinh1.getText();
+        String ma_phi_1 = txfMaPhi1.getText();
+        Integer so_tien_da_nop_1 = Integer.parseInt(txfSoTienDaNop1.getText());
+        Integer so_tien_con_thieu_1 = 0;
+        LocalDate ngay_nop_1 = dpkNgayNop1.getValue();
+        int n = khoanPhiList.size();
+        for (int i = 0; i < n; i++) {
+            if (khoanPhiList.get(i).getMaPhi() == ma_phi_1) {
+                System.out.println(khoanPhiList.get(i).getMaPhi());
+                so_tien_con_thieu_1 = khoanPhiList.get(i).getSoTienCanThu() - so_tien_da_nop_1;
+                break;
+            }
+        }
+        ThuPhiHoGiaDinh tmp = new ThuPhiHoGiaDinh(ma_ho_1, ma_phi_1, so_tien_da_nop_1, so_tien_con_thieu_1, ngay_nop_1);
         return tmp;
     }
 

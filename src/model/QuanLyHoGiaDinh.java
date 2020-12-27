@@ -59,8 +59,9 @@ public class QuanLyHoGiaDinh {
     public boolean updateHoGiaDinh(HoGiaDinh tmp) {
         try {
             Statement stm = this.cnn.createStatement();
-            String selQuery = "update ho_gia_dinh set Ma_ho='" + tmp.getMaHoGiaDinh() + "', Ten_chu_ho N'" + tmp.getTenChuHo() + "', Dia_chi=N'"
-                    + tmp.getDiaChi() + "', Dien_thoai='" + tmp.getSoDienThoai() + "', So_nhan_khau=" + tmp.getSoNhanKhau();
+            String selQuery = "update ho_gia_dinh set Ma_ho='" + tmp.getMaHoGiaDinh() + "', Ten_chu_ho=N'" + tmp.getTenChuHo() + "', Dia_chi=N'"
+                    + tmp.getDiaChi() + "', Dien_thoai='" + tmp.getSoDienThoai() + "', So_nhan_khau=" + tmp.getSoNhanKhau() + " where Ma_ho='" + tmp.getMaHoGiaDinh() + "'";
+            System.out.println(selQuery);
             stm.execute(selQuery);
             return true;
         } catch (Exception e) {
