@@ -136,12 +136,36 @@ public class Controller0 implements Initializable {
     private ObservableList<HoGiaDinh> hoGiaDinhList = FXCollections.observableArrayList();
     private QuanLyHoGiaDinh quanLyHoGiaDinh = new QuanLyHoGiaDinh();
     private HoGiaDinh hoGiaDinhChinh = new HoGiaDinh();
+    private ArrayList<HoGiaDinh> hoGiaDinhSearchList = new ArrayList<>();
 
     private ArrayList<ThuPhiHoGiaDinh> danhSachThuPhiHoGiaDinh;
     private ObservableList<ThuPhiHoGiaDinh> thuPhiHoGiaDinhList = FXCollections.observableArrayList();
     private QuanLyThuPhiHoGiaDinh quanLyThuPhiHoGiaDinh = new QuanLyThuPhiHoGiaDinh();
-    private ThuPhiHoGiaDinh ThuPhiHoGiaDinhChinh = new ThuPhiHoGiaDinh();
+    private ThuPhiHoGiaDinh thuPhiHoGiaDinhChinh = new ThuPhiHoGiaDinh();
+    private ArrayList<ThuPhiHoGiaDinh> thuPhiHoGiaDinhSearchList = new ArrayList<>();
 
+    KhoanPhi getKhoanPhi() {
+        String ma_phi = txfMaPhi.getText();
+        String ten_phi = txfTenPhi.getText();
+        String loai_phi = txfLoaiPhi.getText();
+        Integer so_tien_can_thu = Integer.parseInt(txfSoTienCanThu.getText());
+        LocalDate han_nop = dpkHanNop.getValue();
+        int count1 = 0, count2 = 0, count3 = 0, count4 = 0;
+        int n1 = thuPhiHoGiaDinhList.size();
+        for (int i = 0; i < n1; i++) {
+            ThuPhiHoGiaDinh tp = thuPhiHoGiaDinhList.get(i);
+            if (tp.getMaPhi().equals(ma_phi)) {
+                count3 += tp.getSoTienDaNop();
+                count4 += tp.getSoTienConThieu();
+                if (tp.getSoTienConThieu() == 0 && tp.getSoTienDaNop() > 0) count1++;
+                if (tp.getSoTienConThieu() > 0) count2++;
+                break;
+            }
+        }
+        KhoanPhi tmp = new KhoanPhi(ma_phi, ten_phi, loai_phi, so_tien_can_thu, count1, count2, count3, count4, LocalDate.now(), han_nop, LocalDate.now());
+        updateKhoanPhiTable();
+        return tmp;
+    }
 
     public void searchKhoanPhi() {
         khoanPhiSearchList.clear();
@@ -152,12 +176,9 @@ public class Controller0 implements Initializable {
                     || tmp.getLoaiPhi().contains(keyword))
                 khoanPhiSearchList.add(tmp);
         }
-        if (khoanPhiSearchList.isEmpty()) {
+        if (khoanPhiSearchList.isEmpty())
             (new Controller0()).setAlert("Không tìm thấy kết quả nào!");
-            updateKhoanPhiTable();
-        } else {
-            updateKhoanPhiTable();
-        }
+        tableViewKhoanPhi.setItems(FXCollections.observableList(khoanPhiSearchList));
         khoanPhiKeyword.setText("");
     }
 
@@ -170,20 +191,6 @@ public class Controller0 implements Initializable {
             (new Controller0()).setAlert("Thêm thành công!");
         } else
             (new Controller0()).setAlert("Thêm thất bại! Mời kiểm tra lại dữ liệu!");
-    }
-
-    public void updateKhoanPhi() {
-        KhoanPhi tmp = getKhoanPhi();
-        if (quanLyKhoanPhi.updateKhoanPhi(tmp)) {
-            int i = 0;
-            while (!khoanPhiList.get(i).getMaPhi().equals(tmp.getMaPhi()))
-                i++;
-            khoanPhiList.set(i, tmp);
-            updateKhoanPhiTable();
-            clearKhoanPhiInfo();
-            (new Controller0()).setAlert("Sửa thành công!");
-        } else
-            (new Controller0()).setAlert("Sửa thất bại");
     }
 
     public void deleteKhoanPhi() {
@@ -202,8 +209,183 @@ public class Controller0 implements Initializable {
         }
     }
 
+    public void updateKhoanPhi() {
+        KhoanPhi tmp = getKhoanPhi();
+        if (quanLyKhoanPhi.updateKhoanPhi(tmp)) {
+            int i = 0;
+            while (!khoanPhiList.get(i).getMaPhi().equals(tmp.getMaPhi()))
+                i++;
+            khoanPhiList.set(i, tmp);
+            clearKhoanPhiInfo();
+            (new Controller0()).setAlert("Sửa thành công!");
+        } else
+            (new Controller0()).setAlert("Sửa thất bại");
+    }
+
+    void clearKhoanPhiInfo() {
+        txfMaPhi.setText("");
+        txfTenPhi.setText("");
+        txfSoTienCanThu.setText("");
+        txfLoaiPhi.setText("");
+        dpkHanNop.setValue(null);
+        updateKhoanPhiTable();
+    }
+
     public void cancelKhoanPhi() {
         clearKhoanPhiInfo();
+    }
+
+    public HoGiaDinh getHoGiaDinh() {
+
+
+
+        HoGiaDinh tmp = new HoGiaDinh();
+        return tmp;
+    }
+
+    public void searchHoGiaDinh() {
+        hoGiaDinhSearchList.clear();
+        String keyword = hoGiaDinhKeyword.getText();
+        for (int i = 0; i < hoGiaDinhList.size(); i++) {
+            HoGiaDinh tmp = hoGiaDinhList.get(i);
+            if (tmp.getMaHoGiaDinh().contains(keyword) || tmp.getTenChuHo().contains(keyword)
+                    || tmp.getDiaChi().contains(keyword) || tmp.getSoDienThoai().contains(keyword))
+                hoGiaDinhSearchList.add(tmp);
+        }
+        if (hoGiaDinhSearchList.isEmpty())
+            (new Controller0()).setAlert("Không tìm thấy kết quả nào!");
+        tableViewHoGiaDinh.setItems(FXCollections.observableList(hoGiaDinhSearchList));
+        hoGiaDinhKeyword.setText("");
+    }
+
+    public void themHoGiaDinh() {
+        HoGiaDinh tmp = getHoGiaDinh();
+        if (quanLyHoGiaDinh.addHoGiaDinh(tmp)) {
+            hoGiaDinhList.add(tmp);
+            updateHoGiaDinhTable();
+            clearHoGiaDinhInfo();
+            (new Controller0()).setAlert("Thêm thành công!");
+        } else
+            (new Controller0()).setAlert("Thêm thất bại! Mời kiểm tra lại dữ liệu!");
+    }
+
+    public void deleteHoGiaDinh() {
+        boolean choice = (new Controller0()).setConfirm("Bạn có chắc chắn muốn xóa không?");
+        if (choice) {
+            if (quanLyHoGiaDinh.deleteHoGiaDinh(hoGiaDinhChinh)) {
+                for (int i = 0; i < hoGiaDinhList.size(); i++) {
+                    if (hoGiaDinhList.get(i).getMaHoGiaDinh().equals(hoGiaDinhChinh.getMaHoGiaDinh()))
+                        hoGiaDinhList.remove(i);
+                }
+                updateHoGiaDinhTable();
+                clearHoGiaDinhInfo();
+                (new Controller0()).setAlert("Xóa thành công!");
+            } else
+                (new Controller0()).setAlert("Xóa thất bại! Mời kiểm tra lại!");
+        }
+    }
+
+    public void updateHoGiaDinh() {
+        HoGiaDinh tmp = getHoGiaDinh();
+        if (quanLyHoGiaDinh.updateHoGiaDinh(tmp)) {
+            int i = 0;
+            while (!hoGiaDinhList.get(i).getMaHoGiaDinh().equals(tmp.getMaHoGiaDinh()))
+                i++;
+            hoGiaDinhList.set(i, tmp);
+            clearHoGiaDinhInfo();
+            (new Controller0()).setAlert("Sửa thành công!");
+        } else
+            (new Controller0()).setAlert("Sửa thất bại");
+    }
+
+    void clearHoGiaDinhInfo() {
+        txfMaHoGiaDinh.setText("");
+        txfTenHoGiaDinh.setText("");
+        txfDiaChi.setText("");
+        txfSoDienThoai.setText("");
+        txfSoNhanKhau.setText("");
+        updateHoGiaDinhTable();
+    }
+
+    public void cancelHoGiaDinh() {
+        clearKhoanPhiInfo();
+    }
+
+    public ThuPhiHoGiaDinh getThuPhiHoGiaDinh() {
+
+
+
+        ThuPhiHoGiaDinh tmp = new ThuPhiHoGiaDinh();
+        return tmp;
+    }
+
+    public void searchThuPhiHoGiaDinh() {
+        thuPhiHoGiaDinhSearchList.clear();
+        String keyword = thuPhiHoGiaDinhKeyword.getText();
+        for (int i = 0; i < thuPhiHoGiaDinhList.size(); i++) {
+            ThuPhiHoGiaDinh tmp = thuPhiHoGiaDinhList.get(i);
+            if (tmp.getMaHoGiaDinh().contains(keyword) || tmp.getMaPhi().contains(keyword))
+                thuPhiHoGiaDinhSearchList.add(tmp);
+        }
+        if (thuPhiHoGiaDinhSearchList.isEmpty())
+            (new Controller0()).setAlert("Không tìm thấy kết quả nào!");
+        tableViewThuPhiHoGiaDinh.setItems(FXCollections.observableList(thuPhiHoGiaDinhSearchList));
+        thuPhiHoGiaDinhKeyword.setText("");
+    }
+
+    public void themThuPhiHoGiaDinh() {
+        ThuPhiHoGiaDinh tmp = getThuPhiHoGiaDinh();
+        if (quanLyThuPhiHoGiaDinh.addThuPhiHoGiaDinh(tmp)) {
+            thuPhiHoGiaDinhList.add(tmp);
+            updateThuPhiHoGiaDinhTable();
+            clearThuPhiHoGiaDinhInfo();
+            (new Controller0()).setAlert("Thêm thành công!");
+        } else
+            (new Controller0()).setAlert("Thêm thất bại! Mời kiểm tra lại dữ liệu!");
+    }
+
+    public void deleteThuPhiHoGiaDinh() {
+        boolean choice = (new Controller0()).setConfirm("Bạn có chắc chắn muốn xóa không?");
+        if (choice) {
+            if (quanLyThuPhiHoGiaDinh.deleteThuPhiHoGiaDinh(thuPhiHoGiaDinhChinh)) {
+                for (int i = 0; i < thuPhiHoGiaDinhList.size(); i++) {
+                    if (thuPhiHoGiaDinhList.get(i).getMaHoGiaDinh().equals(thuPhiHoGiaDinhChinh.getMaHoGiaDinh()) &&
+                        thuPhiHoGiaDinhList.get(i).getMaPhi().equals(thuPhiHoGiaDinhChinh.getMaPhi()))
+                        thuPhiHoGiaDinhList.remove(i);
+                }
+                updateThuPhiHoGiaDinhTable();
+                clearThuPhiHoGiaDinhInfo();
+                (new Controller0()).setAlert("Xóa thành công!");
+            } else
+                (new Controller0()).setAlert("Xóa thất bại! Mời kiểm tra lại!");
+        }
+    }
+
+    public void updateThuPhiHoGiaDinh() {
+        ThuPhiHoGiaDinh tmp = getThuPhiHoGiaDinh();
+        if (quanLyThuPhiHoGiaDinh.updateThuPhiHoGiaDinh(tmp)) {
+            int i = 0;
+            while (!thuPhiHoGiaDinhList.get(i).getMaHoGiaDinh().equals(tmp.getMaHoGiaDinh()) ||
+                    !thuPhiHoGiaDinhList.get(i).getMaHoGiaDinh().equals(tmp.getMaHoGiaDinh()))
+                i++;
+            thuPhiHoGiaDinhList.set(i, tmp);
+            clearThuPhiHoGiaDinhInfo();
+            (new Controller0()).setAlert("Sửa thành công!");
+        } else
+            (new Controller0()).setAlert("Sửa thất bại");
+    }
+
+    void clearThuPhiHoGiaDinhInfo() {
+        txfMaHoGiaDinh.setText("");
+        txfTenHoGiaDinh.setText("");
+        txfDiaChi.setText("");
+        txfSoDienThoai.setText("");
+        txfSoNhanKhau.setText("");
+        updateHoGiaDinhTable();
+    }
+
+    public void cancelThuPhiHoGiaDinh() {
+        clearThuPhiHoGiaDinhInfo();
     }
 
     public void getSelectedKhoanPhi() {
@@ -213,6 +395,7 @@ public class Controller0 implements Initializable {
             txfTenPhi.setText(khoanPhiChinh.getTenPhi());
             txfSoTienCanThu.setText(String.valueOf(khoanPhiChinh.getSoTienCanThu()));
             dpkHanNop.setValue(khoanPhiChinh.getHanNop());
+            txfLoaiPhi.setText(khoanPhiChinh.getLoaiPhi());
         });
     }
 
@@ -264,52 +447,12 @@ public class Controller0 implements Initializable {
     }
 
     void updateThuPhiHoGiaDinhTable() {
-        maHoGiaDinh1.setCellValueFactory(new PropertyValueFactory("maHoGiaDinh1"));
-        maPhi1.setCellValueFactory(new PropertyValueFactory("maPhi1"));
-        soTienDaNop1.setCellValueFactory(new PropertyValueFactory("soTienDaNop1"));
-        soTienConThieu1.setCellValueFactory(new PropertyValueFactory("soTienConThieu1"));
-        ngayNop1.setCellValueFactory(new PropertyValueFactory("ngayNop1"));
+        maHoGiaDinh1.setCellValueFactory(new PropertyValueFactory("maHoGiaDinh"));
+        maPhi1.setCellValueFactory(new PropertyValueFactory("maPhi"));
+        soTienDaNop1.setCellValueFactory(new PropertyValueFactory("soTienDaNop"));
+        soTienConThieu1.setCellValueFactory(new PropertyValueFactory("soTienConThieu"));
+        ngayNop1.setCellValueFactory(new PropertyValueFactory("ngayNop"));
         tableViewThuPhiHoGiaDinh.setItems(this.thuPhiHoGiaDinhList);
-    }
-
-    KhoanPhi getKhoanPhi() {
-        String ma_phi = txfMaPhi.getText();
-        String ten_phi = txfTenPhi.getText();
-        String loai_phi = txfLoaiPhi.getText();
-        Integer so_tien_can_thu = Integer.parseInt(txfSoTienCanThu.getText());
-        LocalDate han_nop = dpkHanNop.getValue();
-        int count1 = 0, count2 = 0, count3 = 0, count4 = 0;
-        int n1 = thuPhiHoGiaDinhList.size();
-        for (int i = 0; i < n1; i++) {
-            ThuPhiHoGiaDinh tp = thuPhiHoGiaDinhList.get(i);
-            if (tp.getMaPhi().equals(ma_phi)) {
-                count3 += tp.getSoTienDaNop();
-                count4 += tp.getSoTienConThieu();
-                if (tp.getSoTienConThieu() == 0 && tp.getSoTienDaNop() > 0) count1++;
-                if (tp.getSoTienConThieu() > 0) count2++;
-                break;
-            }
-        }
-        KhoanPhi tmp = new KhoanPhi(ma_phi, ten_phi, loai_phi, so_tien_can_thu, count1, count2, count3, count4, LocalDate.now(), han_nop, LocalDate.now());
-        updateKhoanPhiTable();
-        return tmp;
-    }
-
-    public void searchHoGiaDinh() {
-
-    }
-
-    public void searchThuPhiHoGiaDinh() {
-
-    }
-
-    void clearKhoanPhiInfo() {
-        txfMaPhi.setText("");
-        txfTenPhi.setText("");
-        txfSoTienCanThu.setText("");
-        txfLoaiPhi.setText("");
-        dpkHanNop.setValue(LocalDate.now());
-        updateKhoanPhiTable();
     }
 
     public void initialize(URL location, ResourceBundle resources) {
@@ -348,7 +491,6 @@ public class Controller0 implements Initializable {
             while (var5.hasNext()) {
                 ThuPhiHoGiaDinh b = (ThuPhiHoGiaDinh) var5.next();
                 thuPhiHoGiaDinhList.add(b);
-                System.out.println(b.getMaPhi() + "  " + b.getMaHoGiaDinh());
             }
         } catch (SQLException var8) {
             var8.printStackTrace();

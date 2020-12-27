@@ -35,31 +35,55 @@ public class QuanLyKhoanPhi {
             LocalDate ngayTao = selSet.getDate("Ngay_khoi_tao").toLocalDate();
             LocalDate hanNop = selSet.getDate("Han_nop").toLocalDate();
             LocalDate capNhatLanCuoi = LocalDate.now();
-            KhoanPhi b = new KhoanPhi(maPhi, tenPhi, loaiPhi, soTienCanThu, soHoDaNop, soHoConThieu, tongSoTienDaThu, soTienConThieu, ngayTao, hanNop, capNhatLanCuoi);
+            KhoanPhi b = new KhoanPhi(maPhi, tenPhi, loaiPhi, soTienCanThu, soHoDaNop, soHoConThieu, tongSoTienDaThu,
+                    soTienConThieu, ngayTao, hanNop, capNhatLanCuoi);
             selKhoanPhiList.add(b);
         }
         return selKhoanPhiList;
     }
-    
+
     // Insert into table KhoanPhi tmp, return true/false
     // Try catch
     public boolean addKhoanPhi(KhoanPhi tmp) {
-    	try {
-			return true;
-		} catch (Exception e) {
-			// TODO: handle exception
-			return false;
-		}
+        try {
+            Statement stm = this.cnn.createStatement();
+            String selQuery = "insert into KhoanPhi values('" + tmp.getMaPhi() + "', N'" + tmp.getTenPhi() + "', '"
+                    + tmp.getLoaiPhi() + "', " + String.valueOf(tmp.getSoTienCanThu()) + ", '" + tmp.getNgayTao()
+                    + "', '" + tmp.getHanNop() + "') ";
+            stm.execute(selQuery);
+            return true;
+        } catch (Exception e) {
+            // TODO: handle exception
+            return false;
+        }
     }
-    
+
     // Delete KhoanPhi tmp WHERE MaPhi=tmp.getMaPhi(), return true/false
     // Try catch
     public boolean deleteKhoanPhi(KhoanPhi tmp) {
-    	try {
-			return true;
-		} catch (Exception e) {
-			// TODO: handle exception
-			return false;
-		}
+        try {
+            Statement stm = this.cnn.createStatement();
+            String selQuery = "delete from KhoanPhi where Ma_Phi='" + tmp.getMaPhi() + "'";
+            stm.execute(selQuery);
+            return true;
+        } catch (Exception e) {
+            // TODO: handle exception
+            return false;
+        }
+    }
+
+    public boolean updateKhoanPhi(KhoanPhi tmp) {
+        try {
+            Statement stm = this.cnn.createStatement();
+            String selQuery = "update KhoanPhi set Ten_Phi=N'" + tmp.getTenPhi()
+                    + "', Loai_Phi='" + tmp.getLoaiPhi() + "', So_tien_can_thu= "
+                    + String.valueOf(tmp.getSoTienCanThu()) + ", Ngay_khoi_tao='" + tmp.getNgayTao() + "', Han_nop='"
+                    + tmp.getHanNop() + "' where Ma_Phi='"+tmp.getMaPhi()+"'";
+            stm.execute(selQuery);
+            return true;
+        } catch (Exception e) {
+            // TODO: handle exception
+            return false;
+        }
     }
 }
