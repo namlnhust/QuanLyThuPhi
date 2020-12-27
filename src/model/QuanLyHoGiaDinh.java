@@ -30,42 +30,43 @@ public class QuanLyHoGiaDinh {
         }
         return selHoGiaDinhList;
     }
-    
+
     public boolean addHoGiaDinh(HoGiaDinh tmp) {
-		try {
-			Statement stm = this.cnn.createStatement();
-			String selQuery = "insert into ho_gia_dinh values('" + tmp.getMaHoGiaDinh() + "', N'" + tmp.getTenChuHo() + "', N'"
-					+ tmp.getDiaChi() + "', '" + tmp.getSoDienThoai() + "', " + String.valueOf(tmp.getSoNhanKhau()) + ") ";
-			stm.execute(selQuery);
-			return true;
-		} catch (Exception e) {
-			// TODO: handle exception
-			return false;
-		}
-	}
-    
+        try {
+            Statement stm = this.cnn.createStatement();
+            String selQuery = "insert into ho_gia_dinh values('" + tmp.getMaHoGiaDinh() + "', N'" + tmp.getTenChuHo() + "', N'"
+                    + tmp.getDiaChi() + "', '" + tmp.getSoDienThoai() + "', " + tmp.getSoNhanKhau() + ") ";
+            stm.execute(selQuery);
+            return true;
+        } catch (Exception e) {
+            // TODO: handle exception
+            return false;
+        }
+    }
+
     public boolean deleteHoGiaDinh(HoGiaDinh tmp) {
-		try {
-			Statement stm = this.cnn.createStatement();
-			String selQuery = "delete from ho_gia_dinh where Ma_ho='"+tmp.getMaHoGiaDinh()+"'";
-			stm.execute(selQuery);
-			return true;
-		} catch (Exception e) {
-			// TODO: handle exception
-			return false;
-		}
-	}
-    
+        try {
+            Statement stm = this.cnn.createStatement();
+            String selQuery = "delete from ho_gia_dinh where Ma_ho='" + tmp.getMaHoGiaDinh() + "'";
+            stm.execute(selQuery);
+            return true;
+        } catch (Exception e) {
+            // TODO: handle exception
+            return false;
+        }
+    }
+
     public boolean updateHoGiaDinh(HoGiaDinh tmp) {
-		try {
-			Statement stm = this.cnn.createStatement();
-			String selQuery = "update ho_gia_dinh set Ma_ho='" + tmp.getMaHoGiaDinh() + "', Ten_chu_ho N'" + tmp.getTenChuHo() + "', Dia_chi=N'"
-					+ tmp.getDiaChi() + "', Dien_thoai='" + tmp.getSoDienThoai() + "', So_nhan_khau=" + String.valueOf(tmp.getSoNhanKhau());
-			stm.execute(selQuery);
-			return true;
-		} catch (Exception e) {
-			// TODO: handle exception
-			return false;
-		}
-	}
+        try {
+            Statement stm = this.cnn.createStatement();
+            String selQuery = "update ho_gia_dinh set Ma_ho='" + tmp.getMaHoGiaDinh() + "', Ten_chu_ho=N'" + tmp.getTenChuHo() + "', Dia_chi=N'"
+                    + tmp.getDiaChi() + "', Dien_thoai='" + tmp.getSoDienThoai() + "', So_nhan_khau=" + tmp.getSoNhanKhau() + " where Ma_ho='" + tmp.getMaHoGiaDinh() + "'";
+            System.out.println(selQuery);
+            stm.execute(selQuery);
+            return true;
+        } catch (Exception e) {
+            // TODO: handle exception
+            return false;
+        }
+    }
 }
