@@ -236,10 +236,12 @@ public class Controller0 implements Initializable {
     }
 
     public HoGiaDinh getHoGiaDinh() {
-
-
-
-        HoGiaDinh tmp = new HoGiaDinh();
+        String ma_ho_gia_dinh = txfMaHoGiaDinh.getText();
+        String ten_chu_ho = txfTenHoGiaDinh.getText();
+        String dia_chi = txfDiaChi.getText();
+        String so_dien_thoai = txfSoDienThoai.getText();
+        Integer so_nhan_khau = Integer.parseInt(txfSoNhanKhau.getText());
+        HoGiaDinh tmp = new HoGiaDinh(ma_ho_gia_dinh, ten_chu_ho, dia_chi, so_dien_thoai, so_nhan_khau);
         return tmp;
     }
 
@@ -313,8 +315,10 @@ public class Controller0 implements Initializable {
 
     public ThuPhiHoGiaDinh getThuPhiHoGiaDinh() {
 
-
-
+//        String ma_ho_1 = txfMaHoGiaDinh1.getText();
+//        String ma_phi_1 = txfMaPhi1.getText();
+//        Integer so_tien_da_nop = Integer.parseInt(txfSoTienDaNop1.getText());
+//        Integer so_tien_con_thieu =
         ThuPhiHoGiaDinh tmp = new ThuPhiHoGiaDinh();
         return tmp;
     }
@@ -376,11 +380,10 @@ public class Controller0 implements Initializable {
     }
 
     void clearThuPhiHoGiaDinhInfo() {
-        txfMaHoGiaDinh.setText("");
-        txfTenHoGiaDinh.setText("");
-        txfDiaChi.setText("");
-        txfSoDienThoai.setText("");
-        txfSoNhanKhau.setText("");
+        txfMaHoGiaDinh1.setText("");
+        txfMaPhi1.setText("");
+        txfSoTienDaNop1.setText("");
+        dpkNgayNop1.setValue(null);
         updateHoGiaDinhTable();
     }
 

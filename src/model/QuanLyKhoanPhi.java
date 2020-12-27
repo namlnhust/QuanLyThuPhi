@@ -8,14 +8,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class QuanLyKhoanPhi {
-    private DBConnection dbConnection = new DBConnection();
-    public Connection cnn;
-    private QuanLyHoGiaDinh quanLyHoGiaDinh = new QuanLyHoGiaDinh();
-    private ArrayList<HoGiaDinh> hoGiaDinhList = new ArrayList<>();
+	private DBConnection dbConnection = new DBConnection();
+	public Connection cnn;
+	private QuanLyHoGiaDinh quanLyHoGiaDinh = new QuanLyHoGiaDinh();
+	private ArrayList<HoGiaDinh> hoGiaDinhList = new ArrayList<>();
 
-    public QuanLyKhoanPhi() {
-        this.cnn = this.dbConnection.getConnection();
-    }
+	public QuanLyKhoanPhi() {
+		this.cnn = this.dbConnection.getConnection();
+	}
 
     public ArrayList<KhoanPhi> selectKhoanPhi() throws SQLException {
         Statement stm = this.cnn.createStatement();

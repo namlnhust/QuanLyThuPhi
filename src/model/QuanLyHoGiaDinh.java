@@ -36,7 +36,6 @@ public class QuanLyHoGiaDinh {
             Statement stm = this.cnn.createStatement();
             String selQuery = "insert into ho_gia_dinh values('" + tmp.getMaHoGiaDinh() + "', N'" + tmp.getTenChuHo() + "', N'"
                     + tmp.getDiaChi() + "', '" + tmp.getSoDienThoai() + "', " + tmp.getSoNhanKhau() + ") ";
-            System.out.println(selQuery);
             stm.execute(selQuery);
             return true;
         } catch (Exception e) {
