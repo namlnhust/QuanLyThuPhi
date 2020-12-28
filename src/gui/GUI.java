@@ -22,7 +22,7 @@ public class GUI extends Application {
         try {
             window = primaryStage;
             window.setTitle("Quản lý khoản thu");
-            URL url = new File("D:\\Documents\\IntelliJ\\QuanLyThuPhi\\src\\gui\\GUI0.fxml").toURI().toURL();
+            URL url = new File("E:\\QuanLyThuPhi\\src\\gui\\GUI0.fxml").toURI().toURL();
             root0 = FXMLLoader.load(url);
             scene0 = new Scene(root0);
             window.setScene(scene0);

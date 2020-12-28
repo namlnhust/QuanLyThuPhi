@@ -10,9 +10,13 @@ import java.util.ArrayList;
 public class QuanLyThuPhiHoGiaDinh {
     private DBConnection dbConnection = new DBConnection();
     public Connection cnn;
-
+    
     public QuanLyThuPhiHoGiaDinh() {
         this.cnn = this.dbConnection.getConnection();
+    }
+    
+    public ArrayList<ThuPhiHoGiaDinh> getThuthuPhiHoGiaDinhList() throws SQLException {
+    	return selectThuPhiHoGiaDinh();
     }
 
     public ArrayList<ThuPhiHoGiaDinh> selectThuPhiHoGiaDinh() throws SQLException {
@@ -64,7 +68,7 @@ public class QuanLyThuPhiHoGiaDinh {
             Statement stm = this.cnn.createStatement();
             String selQuery = "update Thu_phi_ho_gia_dinh set Ma_ho='" + tmp.getMaHoGiaDinh() + "', Ma_Phi=N'" + tmp.getMaPhi() + "', So_tien_da_nop="
                     + tmp.getSoTienDaNop() + ", So_tien_con_thieu=" + tmp.getSoTienConThieu() + ", Ngay_nop='" + tmp.getNgayNop()
-                    + "'";
+                    + "' where Ma_ho='"+tmp.getMaHoGiaDinh() +"' and Ma_phi='"+tmp.getMaPhi()+"'";
             stm.execute(selQuery);
             return true;
         } catch (Exception e) {

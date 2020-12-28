@@ -227,8 +227,8 @@
                                     </padding>
                                 </Label>
                                 <TextField fx:id="txfMaPhi1" layoutX="869.0" layoutY="604.0" prefHeight="49.0" prefWidth="277.0" style="-fx-font-size: 1.5em" />
-                                <TextField fx:id="txfMaHoGiaDinh1" layoutX="208.0" layoutY="604.0" prefHeight="49.0" prefWidth="277.0" style="-fx-font-size: 1.5em" />
-                                <Label layoutX="38.0" layoutY="604.0" prefHeight="49.0" prefWidth="139.0" style="-fx-background-color: red;" text="Mã hộ gia đình">
+                                <TextField fx:id="txfMaHoGiaDinh1" layoutX="253.0" layoutY="604.0" prefHeight="49.0" prefWidth="277.0" style="-fx-font-size: 1.5em" />
+                                <Label layoutX="34.0" layoutY="604.0" prefHeight="49.0" prefWidth="180.0" style="-fx-background-color: red;" text="Mã hộ gia đình">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
@@ -239,14 +239,14 @@
                                 <TableView id="tbl_book" fx:id="tableViewThuPhiHoGiaDinh" fixedCellSize="25.0" layoutX="14.0" layoutY="99.0" prefHeight="455.0" prefWidth="1861.0">
                                     <columns>
                                         <TableColumn id="maHoGiaDinh1" fx:id="maHoGiaDinh1" prefWidth="329.0" text="Mã hộ gia đình" />
-                                        <TableColumn id="maPhi1" fx:id="maPhi1" prefWidth="364.0" text="Mã phí" />
-                                        <TableColumn id="soTienDaNop1" fx:id="soTienDaNop1" prefWidth="384.0" text="Số tiền đã nộp" />
-                                        <TableColumn id="soTienConThieu1" fx:id="soTienConThieu1" prefWidth="386.0" text="Số tiền còn thiếu" />
-                                        <TableColumn id="ngayNop1" fx:id="ngayNop1" prefWidth="397.0" text="Ngày nộp" />
+                                        <TableColumn id="maPhi1" fx:id="maPhi1" prefWidth="362.0" text="Mã phí" />
+                                        <TableColumn id="soTienDaNop1" fx:id="soTienDaNop1" prefWidth="405.0" text="Số tiền đã nộp" />
+                                        <TableColumn id="soTienConThieu1" fx:id="soTienConThieu1" prefWidth="411.0" text="Số tiền còn thiếu" />
+                                        <TableColumn id="ngayNop1" fx:id="ngayNop1" prefWidth="353.0" text="Ngày sửa cuối cùng" />
                                     </columns>
                                 </TableView>
-                                <TextField fx:id="txfSoTienDaNop1" layoutX="1514.0" layoutY="604.0" prefHeight="49.0" prefWidth="277.0" style="-fx-font-size: 1.5em" />
-                                <Label layoutX="1338.0" layoutY="604.0" prefHeight="49.0" prefWidth="139.0" style="-fx-background-color: red;" text="Số tiền đã nộp">
+                                <TextField fx:id="txfSoTienDaNop1" layoutX="871.0" layoutY="722.0" prefHeight="49.0" prefWidth="277.0" style="-fx-font-size: 1.5em" />
+                                <Label layoutX="695.0" layoutY="722.0" prefHeight="49.0" prefWidth="139.0" style="-fx-background-color: red;" text="Số tiền đã nộp">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
@@ -254,7 +254,7 @@
                                         <Insets left="10.0" />
                                     </padding>
                                 </Label>
-                                <Label layoutX="693.0" layoutY="722.0" prefHeight="49.0" prefWidth="139.0" style="-fx-background-color: red;" text="Ngày nộp">
+                                <Label layoutX="32.0" layoutY="722.0" prefHeight="49.0" prefWidth="184.0" style="-fx-background-color: red;" text="Ngày sửa cuối cùng">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
@@ -262,7 +262,7 @@
                                         <Insets left="10.0" />
                                     </padding>
                                 </Label>
-                                <Button layoutX="71.0" layoutY="835.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="215.0" text="Hiển thị">
+                                <Button layoutX="71.0" layoutY="835.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="215.0" text="Dọn">
                                     <font>
                                         <Font size="25.0" />
                                     </font>
@@ -287,7 +287,7 @@
                                         <Font size="25.0" />
                                     </font>
                                 </Button>
-                                <DatePicker fx:id="dpkNgayNop1" layoutX="869.0" layoutY="722.0" prefHeight="49.0" prefWidth="277.0" style="-fx-font-size: 1.5em" />
+                                <DatePicker fx:id="dpkNgayNop1" layoutX="253.0" layoutY="723.0" prefHeight="49.0" prefWidth="277.0" style="-fx-font-size: 1.5em" />
                                 <Label alignment="CENTER" layoutX="1074.0" layoutY="29.0" prefHeight="45.0" prefWidth="239.0" style="-fx-background-color: f0b022;" text="Nhập từ khóa tìm kiếm:" textAlignment="CENTER">
                                     <font>
                                         <Font size="20.0" />
@@ -299,6 +299,12 @@
                                         <Font size="20.0" />
                                     </font>
                                 </Button>
+                        <TextField fx:id="txfNopThem1" layoutX="1313.0" layoutY="663.0" prefHeight="49.0" prefWidth="277.0" style="-fx-font-size: 1.5em" />
+                        <Button layoutX="1625.0" layoutY="661.0" mnemonicParsing="false" onAction="#addNopThem" prefHeight="54.0" prefWidth="206.0" text="Nộp thêm">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Button>
                             </children>
                         </AnchorPane>
                     </content>
