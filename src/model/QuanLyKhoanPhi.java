@@ -6,12 +6,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class QuanLyKhoanPhi {
-	private DBConnection dbConnection = new DBConnection();
+	public DBConnection dbConnection = new DBConnection();
 	public Connection cnn;
 	private QuanLyHoGiaDinh quanLyHoGiaDinh = new QuanLyHoGiaDinh();
 	private QuanLyThuPhiHoGiaDinh quanLyThuPhiHoGiaDinh = new QuanLyThuPhiHoGiaDinh();
+	
 	private ArrayList<HoGiaDinh> hoGiaDinhList = new ArrayList<>();
 	private ArrayList<ThuPhiHoGiaDinh> thuPhiHoGiaDinhList = new ArrayList<>();
 
@@ -31,22 +33,69 @@ public class QuanLyKhoanPhi {
 			String tenPhi = selSet.getString("Ten_Phi");
 			String loaiPhi = selSet.getString("Loai_Phi");
 			Integer soTienCanThu = selSet.getInt("So_tien_can_thu");
-			int soHoDaNop = 0, soHoConThieu = hoGiaDinhList.size(), tongSoTienDaThu = 0, soTienConThieu = 0;
-			int n1 = thuPhiHoGiaDinhList.size();
-			System.out.println(n1);
-			for (int i = 0; i < n1; i++) {
-				ThuPhiHoGiaDinh tp = thuPhiHoGiaDinhList.get(i);
-				if (tp.getMaPhi().equals(maPhi)) {
-					tongSoTienDaThu += tp.getSoTienDaNop();
-					if (tp.getSoTienConThieu() == 0 && tp.getSoTienDaNop() > 0) {
-						soHoDaNop++;
-						soHoConThieu--;
+			int soHoDaNop = 0, soHoConThieu = 0, tongSoTienDaThu = 0, soTienConThieu = 0;
+//			int n1 = thuPhiHoGiaDinhList.size();
+//			System.out.println(n1);
+//			for (int i = 0; i < n1; i++) {
+//				ThuPhiHoGiaDinh tp = thuPhiHoGiaDinhList.get(i);
+//				if (tp.getMaPhi().equals(maPhi)) {
+//					tongSoTienDaThu += tp.getSoTienDaNop();
+//					if (tp.getSoTienConThieu() == 0 && tp.getSoTienDaNop() > 0) {
+//						soHoDaNop++;
+//						soHoConThieu--;
+//					}
+//				}
+//			}
+
+			if (loaiPhi.equals("TP01")) {
+				soHoConThieu = hoGiaDinhList.size();
+				int n1 = thuPhiHoGiaDinhList.size();
+				for (int i = 0; i < n1; i++) {
+					ThuPhiHoGiaDinh tp = thuPhiHoGiaDinhList.get(i);
+					if (tp.getMaPhi().equals(maPhi)) {
+						tongSoTienDaThu += tp.getSoTienDaNop();
+						if (tp.getSoTienConThieu() == 0 && tp.getSoTienDaNop() > 0) {
+							soHoDaNop++;
+							soHoConThieu--;
+						}
+						break;
+					}
+				}
+				soTienConThieu = hoGiaDinhList.size() * soTienCanThu - tongSoTienDaThu;
+			} else if (loaiPhi.equals("TP02")) {
+				soHoConThieu = hoGiaDinhList.size();
+				int n1 = thuPhiHoGiaDinhList.size();
+				for (int i = 0; i < n1; i++) {
+					ThuPhiHoGiaDinh tp = thuPhiHoGiaDinhList.get(i);
+					if (tp.getMaPhi().equals(maPhi)) {
+						tongSoTienDaThu += tp.getSoTienDaNop();
+						if (tp.getSoTienConThieu() == 0 && tp.getSoTienDaNop() > 0) {
+							soHoDaNop++;
+							soHoConThieu--;
+						}
+						break;
+					}
+				}
+				int tongSoTienCanThu = 0;
+				for (HoGiaDinh hgd : hoGiaDinhList) {
+					tongSoTienCanThu += soTienCanThu * hgd.getSoNhanKhau();
+				}
+				System.out.println(tongSoTienCanThu);
+				System.out.println(tongSoTienDaThu);
+				System.out.println("");
+				soTienConThieu = tongSoTienCanThu - tongSoTienDaThu;
+			} else if (loaiPhi.equals("DG00")) {
+				int n1 = thuPhiHoGiaDinhList.size();
+				for (int i = 0; i < n1; i++) {
+					ThuPhiHoGiaDinh tp = thuPhiHoGiaDinhList.get(i);
+					if (tp.getMaPhi().equals(maPhi)) {
+						tongSoTienDaThu += tp.getSoTienDaNop();
+						if (tp.getSoTienDaNop() > 0)
+							soHoDaNop++;
+						break;
 					}
 				}
 			}
-			System.out.println(tongSoTienDaThu);
-			soTienConThieu = hoGiaDinhList.size() * soTienCanThu - tongSoTienDaThu;
-			System.out.println(soTienConThieu);
 			LocalDate ngayTao = selSet.getDate("Ngay_khoi_tao").toLocalDate();
 			LocalDate hanNop = selSet.getDate("Han_nop").toLocalDate();
 			LocalDate capNhatLanCuoi = LocalDate.now();
@@ -99,6 +148,24 @@ public class QuanLyKhoanPhi {
 			// TODO: handle exception
 			return false;
 		}
+	}
+	
+	public HashMap<String, Object> getKhoanPhiInfor(String Ma_phi) {
+		HashMap<String, Object> khoanPhiInfor = new HashMap<String, Object>();
+		try {
+			Statement stm = this.cnn.createStatement();
+			 String selQuery = "select * from KhoanPhi where Ma_phi='"+Ma_phi+"'";
+			 ResultSet rs= stm.executeQuery(selQuery);
+			 while(rs.next()) {
+				 khoanPhiInfor.put("Loai_phi", "Loai_phi");
+				 khoanPhiInfor.put("Ma_phi", "Ma_phi");
+				 khoanPhiInfor.put("So_tien_can_thu", "So_tien_can_thu");
+				 
+			 }
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return khoanPhiInfor;
 	}
 
 }

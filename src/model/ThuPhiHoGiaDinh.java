@@ -7,7 +7,7 @@ public class ThuPhiHoGiaDinh {
     private String maPhi;
     private Integer soTienDaNop;
     private Integer soTienConThieu;
-    private LocalDate ngayNop;
+	private LocalDate ngayNop;
 
     public ThuPhiHoGiaDinh(String maHo, String maPhi, Integer soTienDaNop, Integer soTienConThieu, LocalDate ngayNop) {
         this.maHoGiaDinh = maHo;
@@ -51,7 +51,7 @@ public class ThuPhiHoGiaDinh {
     public void setSoTienConThieu(Integer soTienConThieu) {
         this.soTienConThieu = soTienConThieu;
     }
-
+    
     public LocalDate getNgayNop() {
         return ngayNop;
     }

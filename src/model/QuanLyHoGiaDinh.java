@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class QuanLyHoGiaDinh {
-    private DBConnection dbConnection = new DBConnection();
+    public DBConnection dbConnection = new DBConnection();
     public Connection cnn;
 
     public QuanLyHoGiaDinh() {
@@ -69,5 +69,24 @@ public class QuanLyHoGiaDinh {
             return false;
         }
     }
+    
+    public HoGiaDinh getHoGiaDinh(String Ma_ho) {
+		HoGiaDinh hgd= new HoGiaDinh();
+		try {
+			Statement stm = this.cnn.createStatement();
+			String selQuery = "select * from ho_gia_dinh where Ma_ho='"+Ma_ho+"'";
+			ResultSet rs= stm.executeQuery(selQuery);
+			while (rs.next()) {
+				hgd.setMaHoGiaDinh(rs.getString("Ma_ho"));
+				hgd.setTenChuHo(rs.getString("Ten_chu_ho"));
+				hgd.setDiaChi(rs.getString("Dia_chi"));
+				hgd.setSoDienThoai(rs.getString("Dien_thoai"));
+				hgd.setSoNhanKhau(rs.getInt("So_nhan_khau"));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return hgd;
+	}
 
 }
