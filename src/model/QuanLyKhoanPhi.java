@@ -58,10 +58,9 @@ public class QuanLyKhoanPhi {
 							soHoDaNop++;
 							soHoConThieu--;
 						}
-						break;
 					}
 				}
-				soTienConThieu = hoGiaDinhList.size() * soTienCanThu - tongSoTienDaThu;
+				soTienConThieu = Math.max(0,hoGiaDinhList.size() * soTienCanThu - tongSoTienDaThu);
 			} else if (loaiPhi.equals("TP02")) {
 				soHoConThieu = hoGiaDinhList.size();
 				int n1 = thuPhiHoGiaDinhList.size();
@@ -73,17 +72,13 @@ public class QuanLyKhoanPhi {
 							soHoDaNop++;
 							soHoConThieu--;
 						}
-						break;
 					}
 				}
 				int tongSoTienCanThu = 0;
 				for (HoGiaDinh hgd : hoGiaDinhList) {
 					tongSoTienCanThu += soTienCanThu * hgd.getSoNhanKhau();
 				}
-				System.out.println(tongSoTienCanThu);
-				System.out.println(tongSoTienDaThu);
-				System.out.println("");
-				soTienConThieu = tongSoTienCanThu - tongSoTienDaThu;
+				soTienConThieu = Math.max(0,tongSoTienCanThu - tongSoTienDaThu);
 			} else if (loaiPhi.equals("DG00")) {
 				int n1 = thuPhiHoGiaDinhList.size();
 				for (int i = 0; i < n1; i++) {
@@ -92,9 +87,9 @@ public class QuanLyKhoanPhi {
 						tongSoTienDaThu += tp.getSoTienDaNop();
 						if (tp.getSoTienDaNop() > 0)
 							soHoDaNop++;
-						break;
 					}
 				}
+				soTienCanThu=0;
 			}
 			LocalDate ngayTao = selSet.getDate("Ngay_khoi_tao").toLocalDate();
 			LocalDate hanNop = selSet.getDate("Han_nop").toLocalDate();
@@ -157,9 +152,9 @@ public class QuanLyKhoanPhi {
 			 String selQuery = "select * from KhoanPhi where Ma_phi='"+Ma_phi+"'";
 			 ResultSet rs= stm.executeQuery(selQuery);
 			 while(rs.next()) {
-				 khoanPhiInfor.put("Loai_phi", "Loai_phi");
-				 khoanPhiInfor.put("Ma_phi", "Ma_phi");
-				 khoanPhiInfor.put("So_tien_can_thu", "So_tien_can_thu");
+				 khoanPhiInfor.put("Loai_phi", rs.getString("Loai_phi"));
+				 khoanPhiInfor.put("Ma_phi", rs.getString("Ma_phi"));
+				 khoanPhiInfor.put("So_tien_can_thu",rs.getInt("So_tien_can_thu"));
 				 
 			 }
 		} catch (Exception e) {

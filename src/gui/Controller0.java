@@ -172,65 +172,50 @@ public class Controller0 implements Initializable {
 		Integer so_tien_can_thu = Integer.parseInt(txfSoTienCanThu.getText());
 		LocalDate han_nop = dpkHanNop.getValue();
 		int so_ho_da_nop = 0, so_ho_con_thieu = 0, tong_so_tien_da_thu = 0, so_tien_con_thieu = 0;
-//		boolean exit = false;
-//		for (int i = 0; i < khoanPhiList.size(); i++) {
-//			if (khoanPhiList.get(i).getMaPhi().equals(ma_phi)) {
-//				so_ho_da_nop = khoanPhiList.get(i).getSoHoDaNop();
-//				so_ho_con_thieu = khoanPhiList.get(i).getSoHoConThieu();
-//				tong_so_tien_da_thu = khoanPhiList.get(i).getTongSoTienDaThu();
-//				so_tien_con_thieu = khoanPhiList.get(i).getSoTienConThieu();
-//				exit = true;
-//				break;
-//			}
-//		}
-//		if (!exit) {
-			if (loai_phi.equals("TP01")) {
-				so_ho_con_thieu = hoGiaDinhList.size();
-				int n1 = thuPhiHoGiaDinhList.size();
-				for (int i = 0; i < n1; i++) {
-					ThuPhiHoGiaDinh tp = thuPhiHoGiaDinhList.get(i);
-					if (tp.getMaPhi().equals(ma_phi)) {
-						tong_so_tien_da_thu += tp.getSoTienDaNop();
-						if (tp.getSoTienConThieu() == 0 && tp.getSoTienDaNop() > 0) {
-							so_ho_da_nop++;
-							so_ho_con_thieu--;
-						}
-						break;
-					}
-				}
-				so_tien_con_thieu = hoGiaDinhList.size() * so_tien_can_thu - tong_so_tien_da_thu;
-			} else if (loai_phi.equals("TP02")) {
-				so_ho_con_thieu = hoGiaDinhList.size();
-				int n1 = thuPhiHoGiaDinhList.size();
-				for (int i = 0; i < n1; i++) {
-					ThuPhiHoGiaDinh tp = thuPhiHoGiaDinhList.get(i);
-					if (tp.getMaPhi().equals(ma_phi)) {
-						tong_so_tien_da_thu += tp.getSoTienDaNop();
-						if (tp.getSoTienConThieu() == 0 && tp.getSoTienDaNop() > 0) {
-							so_ho_da_nop++;
-							so_ho_con_thieu--;
-						}
-						break;
-					}
-				}
-				int tongSoGTienCanThu = 0;
-				for (HoGiaDinh hgd : hoGiaDinhList) {
-					tongSoGTienCanThu += so_tien_can_thu * hgd.getSoNhanKhau();
-				}
-				so_tien_con_thieu = tongSoGTienCanThu - tong_so_tien_da_thu;
-			} else if (loai_phi.equals("DG00")) {
-				int n1 = thuPhiHoGiaDinhList.size();
-				for (int i = 0; i < n1; i++) {
-					ThuPhiHoGiaDinh tp = thuPhiHoGiaDinhList.get(i);
-					if (tp.getMaPhi().equals(ma_phi)) {
-						tong_so_tien_da_thu += tp.getSoTienDaNop();
-						if (tp.getSoTienDaNop() > 0)
-							so_ho_da_nop++;
-						break;
+		if (loai_phi.equals("TP01")) {
+			so_ho_con_thieu = hoGiaDinhList.size();
+			int n1 = thuPhiHoGiaDinhList.size();
+			for (int i = 0; i < n1; i++) {
+				ThuPhiHoGiaDinh tp = thuPhiHoGiaDinhList.get(i);
+				if (tp.getMaPhi().equals(ma_phi)) {
+					tong_so_tien_da_thu += tp.getSoTienDaNop();
+					if (tp.getSoTienConThieu() == 0 && tp.getSoTienDaNop() > 0) {
+						so_ho_da_nop++;
+						so_ho_con_thieu--;
 					}
 				}
 			}
-//		}
+			so_tien_con_thieu = Math.max(0,hoGiaDinhList.size() * so_tien_can_thu - tong_so_tien_da_thu);
+		} else if (loai_phi.equals("TP02")) {
+			so_ho_con_thieu = hoGiaDinhList.size();
+			int n1 = thuPhiHoGiaDinhList.size();
+			for (int i = 0; i < n1; i++) {
+				ThuPhiHoGiaDinh tp = thuPhiHoGiaDinhList.get(i);
+				if (tp.getMaPhi().equals(ma_phi)) {
+					tong_so_tien_da_thu += tp.getSoTienDaNop();
+					if (tp.getSoTienConThieu() == 0 && tp.getSoTienDaNop() > 0) {
+						so_ho_da_nop++;
+						so_ho_con_thieu--;
+					}
+				}
+			}
+			int tongSoGTienCanThu = 0;
+			for (HoGiaDinh hgd : hoGiaDinhList) {
+				tongSoGTienCanThu += so_tien_can_thu * hgd.getSoNhanKhau();
+			}
+			so_tien_con_thieu = Math.max(0, tongSoGTienCanThu - tong_so_tien_da_thu);
+		} else if (loai_phi.equals("DG00")) {
+			int n1 = thuPhiHoGiaDinhList.size();
+			for (int i = 0; i < n1; i++) {
+				ThuPhiHoGiaDinh tp = thuPhiHoGiaDinhList.get(i);
+				if (tp.getMaPhi().equals(ma_phi)) {
+					tong_so_tien_da_thu += tp.getSoTienDaNop();
+					if (tp.getSoTienDaNop() > 0)
+						so_ho_da_nop++;
+				}
+			}
+			so_tien_can_thu=0;
+		}
 		KhoanPhi tmp = new KhoanPhi(ma_phi, ten_phi, loai_phi, so_tien_can_thu, so_ho_da_nop, so_ho_con_thieu,
 				tong_so_tien_da_thu, so_tien_con_thieu, LocalDate.now(), han_nop, LocalDate.now());
 		return tmp;
@@ -268,12 +253,13 @@ public class Controller0 implements Initializable {
 		if (choice) {
 			if (quanLyKhoanPhi.deleteKhoanPhi(khoanPhiChinh)) {
 				for (int i = 0; i < khoanPhiList.size(); i++) {
-					String maPhi= khoanPhiList.get(i).getMaPhi();
+					khoanPhiList.remove(i);
+					String maPhi = khoanPhiList.get(i).getMaPhi();
+					
 					if (khoanPhiList.get(i).getMaPhi().equals(maPhi)) {
-						
+
 						thuPhiHoGiaDinhList.removeIf(n -> (n.getMaPhi().equals(maPhi)));
-						
-						khoanPhiList.remove(i);
+
 						break;
 					}
 				}
@@ -292,11 +278,9 @@ public class Controller0 implements Initializable {
 			int i = 0;
 			while (!khoanPhiList.get(i).getMaPhi().equals(tmp.getMaPhi()))
 				i++;
-			
-			if(tmp.getLoaiPhi().equals("TP01"))
-			
 			khoanPhiList.set(i, tmp);
 			clearKhoanPhiInfo();
+			reloadThuPhiHoGiaDinhTable();
 			(new Controller0()).setAlert("Sửa thành công!");
 		} else
 			(new Controller0()).setAlert("Sửa thất bại");
@@ -357,6 +341,7 @@ public class Controller0 implements Initializable {
 				}
 				khoanPhiList.set(i, khoanPhiList.get(i));
 			}
+			reloadKhoanPhiTable();
 			updateHoGiaDinhTable();
 			clearHoGiaDinhInfo();
 			(new Controller0()).setAlert("Thêm thành công!");
@@ -412,7 +397,9 @@ public class Controller0 implements Initializable {
 					}
 				}
 
-				updateThuPhiHoGiaDinhTable();
+//				updateThuPhiHoGiaDinhTable();
+				reloadThuPhiHoGiaDinhTable();
+				reloadKhoanPhiTable();
 				clearHoGiaDinhInfo();
 				(new Controller0()).setAlert("Xóa thành công!");
 			} else
@@ -445,10 +432,11 @@ public class Controller0 implements Initializable {
 							thuPhiHoGiaDinhList.set(k, thuPhiHoGiaDinhList.get(k));
 						}
 					}
-					khoanPhiSearchList.set(i, khoanPhiList.get(i));
+					khoanPhiList.set(j, khoanPhiList.get(j));
 				}
 			}
-
+			reloadKhoanPhiTable();
+			reloadThuPhiHoGiaDinhTable();
 			hoGiaDinhList.set(i, tmp);
 			clearHoGiaDinhInfo();
 			(new Controller0()).setAlert("Sửa thành công!");
@@ -523,17 +511,25 @@ public class Controller0 implements Initializable {
 			if (khoanPhiList.get(i).getLoaiPhi().equals("DG00")) {
 				khoanPhiList.get(i).setTongSoTienDaThu(khoanPhiList.get(i).getTongSoTienDaThu() + tmp.getSoTienDaNop());
 				khoanPhiList.get(i).setSoHoDaNop(khoanPhiList.get(i).getSoHoDaNop() + 1);
-			} else if (khoanPhiList.get(i).getLoaiPhi().equals("TP01")
-					|| khoanPhiList.get(i).getLoaiPhi().equals("TP02")) {
+			} else if (khoanPhiList.get(i).getLoaiPhi().equals("TP01")) {
 				khoanPhiList.get(i).setTongSoTienDaThu(khoanPhiList.get(i).getTongSoTienDaThu() + tmp.getSoTienDaNop());
 				khoanPhiList.get(i).setSoTienConThieu(khoanPhiList.get(i).getSoTienConThieu() - tmp.getSoTienDaNop());
 				if (tmp.getSoTienDaNop() >= khoanPhiList.get(i).getSoTienCanThu()) {
 					khoanPhiList.get(i).setSoHoDaNop(khoanPhiList.get(i).getSoHoDaNop() + 1);
 					khoanPhiList.get(i).setSoHoConThieu(khoanPhiList.get(i).getSoHoConThieu() - 1);
 				}
+			} else if (khoanPhiList.get(i).getLoaiPhi().equals("TP02")) {
+				khoanPhiList.get(i).setTongSoTienDaThu(khoanPhiList.get(i).getTongSoTienDaThu() + tmp.getSoTienDaNop());
+				khoanPhiList.get(i).setSoTienConThieu(khoanPhiList.get(i).getSoTienConThieu() - tmp.getSoTienDaNop());
+				if (tmp.getSoTienDaNop() >= khoanPhiList.get(i).getSoTienCanThu()
+						* quanLyHoGiaDinh.getHoGiaDinh(tmp.getMaHoGiaDinh()).getSoNhanKhau()) {
+					khoanPhiList.get(i).setSoHoDaNop(khoanPhiList.get(i).getSoHoDaNop() + 1);
+					khoanPhiList.get(i).setSoHoConThieu(khoanPhiList.get(i).getSoHoConThieu() - 1);
+				}
 			}
 
 			khoanPhiList.set(i, khoanPhiList.get(i));
+//			reloadKhoanPhiTable();
 			(new Controller0()).setAlert("Thêm thành công!");
 		} else
 			(new Controller0()).setAlert("Thêm thất bại! Mời kiểm tra lại dữ liệu!");
@@ -561,8 +557,7 @@ public class Controller0 implements Initializable {
 				while (!khoanPhiList.get(j).getMaPhi().equals(tmp.getMaPhi()))
 					j++;
 
-				if (khoanPhiList.get(j).getLoaiPhi().equals("TP01")
-						|| khoanPhiList.get(j).getLoaiPhi().equals("TP02")) {
+				if (khoanPhiList.get(j).getLoaiPhi().equals("TP01")) {
 					khoanPhiList.get(j)
 							.setTongSoTienDaThu(khoanPhiList.get(j).getTongSoTienDaThu() - tmp.getSoTienDaNop());
 					khoanPhiList.get(j)
@@ -572,12 +567,23 @@ public class Controller0 implements Initializable {
 						khoanPhiList.get(j).setSoHoDaNop(khoanPhiList.get(j).getSoHoDaNop() - 1);
 						khoanPhiList.get(j).setSoHoConThieu(khoanPhiList.get(j).getSoHoConThieu() + 1);
 					}
+				} else if (khoanPhiList.get(i).getLoaiPhi().equals("TP02")) {
+					khoanPhiList.get(i)
+							.setTongSoTienDaThu(khoanPhiList.get(i).getTongSoTienDaThu() + tmp.getSoTienDaNop());
+					khoanPhiList.get(i)
+							.setSoTienConThieu(khoanPhiList.get(i).getSoTienConThieu() - tmp.getSoTienDaNop());
+					if (tmp.getSoTienDaNop() >= khoanPhiList.get(i).getSoTienCanThu()
+							* quanLyHoGiaDinh.getHoGiaDinh(tmp.getMaHoGiaDinh()).getSoNhanKhau()) {
+						khoanPhiList.get(i).setSoHoDaNop(khoanPhiList.get(i).getSoHoDaNop() - 1);
+						khoanPhiList.get(i).setSoHoConThieu(khoanPhiList.get(i).getSoHoConThieu() + 1);
+					}
 				} else if (khoanPhiList.get(j).getLoaiPhi().equals("DG00")) {
 					khoanPhiList.get(j)
 							.setTongSoTienDaThu(khoanPhiList.get(j).getTongSoTienDaThu() - tmp.getSoTienDaNop());
 					khoanPhiList.get(j).setSoHoDaNop(khoanPhiList.get(j).getSoHoDaNop() - 1);
 				}
 				khoanPhiList.set(j, khoanPhiList.get(j));
+				reloadKhoanPhiTable();
 				clearThuPhiHoGiaDinhInfo();
 
 				(new Controller0()).setAlert("Xóa thành công!");
@@ -644,6 +650,7 @@ public class Controller0 implements Initializable {
 			thuPhiHoGiaDinhList.set(i, tmp);
 			clearThuPhiHoGiaDinhInfo();
 			khoanPhiList.set(j, khoanPhiList.get(j));
+			reloadKhoanPhiTable();
 //			updateKhoanPhiTable();
 			(new Controller0()).setAlert("Sửa thành công!");
 		} else
@@ -662,7 +669,7 @@ public class Controller0 implements Initializable {
 		txfMaPhi1.setText("");
 		txfSoTienDaNop1.setText("");
 		dpkNgayNop1.setValue(null);
-		updateHoGiaDinhTable();
+		updateThuPhiHoGiaDinhTable();
 	}
 
 	public void cancelThuPhiHoGiaDinh() {
@@ -737,6 +744,42 @@ public class Controller0 implements Initializable {
 		tableViewThuPhiHoGiaDinh.setItems(this.thuPhiHoGiaDinhList);
 	}
 
+	public void reloadThuPhiHoGiaDinhTable() {
+		Iterator var5;
+		danhSachThuPhiHoGiaDinh.clear();
+		thuPhiHoGiaDinhList.clear();
+		try {
+			danhSachThuPhiHoGiaDinh = quanLyThuPhiHoGiaDinh.selectThuPhiHoGiaDinh();
+			var5 = danhSachThuPhiHoGiaDinh.iterator();
+			while (var5.hasNext()) {
+				ThuPhiHoGiaDinh b = (ThuPhiHoGiaDinh) var5.next();
+				thuPhiHoGiaDinhList.add(b);
+			}
+		} catch (SQLException var8) {
+			var8.printStackTrace();
+		}
+		updateThuPhiHoGiaDinhTable();
+		getSelectedThuPhiHoGiaDinh();
+	}
+	
+	public void reloadKhoanPhiTable() {
+		Iterator var5;
+		danhSachKhoanPhi.clear();
+		khoanPhiList.clear();
+		try {
+			danhSachKhoanPhi = quanLyKhoanPhi.selectKhoanPhi();
+			var5 = danhSachKhoanPhi.iterator();
+			while (var5.hasNext()) {
+				KhoanPhi b = (KhoanPhi) var5.next();
+				khoanPhiList.add(b);
+			}
+		} catch (SQLException var8) {
+			var8.printStackTrace();
+		}
+		updateKhoanPhiTable();
+		getSelectedKhoanPhi();
+	}
+	
 	public void initialize(URL location, ResourceBundle resources) {
 		Iterator var3;
 		try {
