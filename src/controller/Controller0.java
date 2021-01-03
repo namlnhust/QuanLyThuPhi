@@ -1,16 +1,18 @@
-package gui;
+package controller;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import model.*;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.*;
@@ -18,6 +20,9 @@ import java.util.*;
 public class Controller0 implements Initializable {
 	private DBConnection dbConnection = new DBConnection();
 	public Connection cnn = this.dbConnection.getConnection();
+
+	@FXML
+	private TabPane tabPane = new TabPane();
 
 	@FXML
 	private TableView<KhoanPhi> tableViewKhoanPhi = new TableView();
@@ -110,6 +115,12 @@ public class Controller0 implements Initializable {
 	// update28/12
 	@FXML
 	private TextField txfNopThem1 = new TextField();
+	@FXML
+	private RadioButton rdbTatCa = new RadioButton();
+	@FXML
+	private RadioButton rdbDaNop = new RadioButton();
+	@FXML
+	private RadioButton rdbChuaNop = new RadioButton();
 
 	public Controller0() {
 	}
@@ -472,7 +483,7 @@ public class Controller0 implements Initializable {
 //					break;
 //				}
 //			}
-			so_tien_con_thieu_1 = ((int) quanLyKhoanPhi.getKhoanPhiInfor(ma_phi_1).get("So_tien_can_thu"))
+		so_tien_con_thieu_1 = ((int) quanLyKhoanPhi.getKhoanPhiInfor(ma_phi_1).get("So_tien_can_thu"))
 					- so_tien_da_nop_1;
 		} else if (loaiPhi.equals("TP02")) {
 			so_tien_con_thieu_1 = ((int) quanLyKhoanPhi.getKhoanPhiInfor(ma_phi_1).get("So_tien_can_thu"))
@@ -779,7 +790,24 @@ public class Controller0 implements Initializable {
 		updateKhoanPhiTable();
 		getSelectedKhoanPhi();
 	}
-	
+
+	public void showByKhoanPhi(String maPhi, String status) {
+		ObservableList<ThuPhiHoGiaDinh> showingList = FXCollections.observableArrayList(quanLyThuPhiHoGiaDinh.showByKhoanPhi(maPhi, status));
+		tableViewThuPhiHoGiaDinh.setItems(showingList);
+		tabPane.getSelectionModel().select(3);
+	}
+
+	String maPhiToShow = "";
+	String statusToShow = "TatCa";
+
+	public void setMaPhiToShow(String maPhiToShow) {
+		this.maPhiToShow = maPhiToShow;
+	}
+
+	public void setStatusToShow(String statusToShow) {
+		this.statusToShow = statusToShow;
+	}
+
 	public void initialize(URL location, ResourceBundle resources) {
 		Iterator var3;
 		try {
@@ -794,6 +822,36 @@ public class Controller0 implements Initializable {
 		}
 		updateKhoanPhiTable();
 		getSelectedKhoanPhi();
+
+		ToggleGroup group = new ToggleGroup();
+		rdbTatCa.setToggleGroup(group);
+		rdbTatCa.setSelected(true);
+		rdbDaNop.setToggleGroup(group);
+		rdbChuaNop.setToggleGroup(group);
+
+		group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+			@Override
+			public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
+				if (group.getSelectedToggle() != null) {
+					RadioButton button = (RadioButton) group.getSelectedToggle();
+					if (button.getText().equals("Đã nộp"))
+						setStatusToShow("DaNop");
+					else if (button.getText().equals("Chưa nộp"))
+						setStatusToShow("ChuaNop");
+					showByKhoanPhi(maPhiToShow, statusToShow);
+				}
+			}
+		});
+
+		tableViewKhoanPhi.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+					setMaPhiToShow(tableViewThuPhiHoGiaDinh.getSelectionModel().getSelectedItem().getMaPhi());
+					showByKhoanPhi(maPhiToShow, statusToShow);
+				}
+			}
+		});
 
 		Iterator var4;
 		try {

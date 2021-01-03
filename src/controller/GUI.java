@@ -1,4 +1,4 @@
-package gui;
+package controller;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -6,13 +6,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.net.URL;
-
 public class GUI extends Application {
     static Stage window;
     static Parent root0;
     static Scene scene0;
+    static Parent appRoot;
+    static Scene appScene;
 
     public GUI() {
     };
@@ -22,11 +21,12 @@ public class GUI extends Application {
         try {
             window = primaryStage;
             window.setTitle("Quản lý khoản thu");
-            URL url = new File("E:\\QuanLyThuPhi\\src\\gui\\GUI0.fxml").toURI().toURL();
-            root0 = FXMLLoader.load(url);
+            root0 = FXMLLoader.load(this.getClass().getResource("/view/GUILogin.fxml"));
             scene0 = new Scene(root0);
             window.setScene(scene0);
             window.show();
+            appRoot = FXMLLoader.load(this.getClass().getResource("/view/GUI0.fxml"));
+            appScene = new Scene(appRoot);
         } catch (Exception e) {
             e.printStackTrace();
         }

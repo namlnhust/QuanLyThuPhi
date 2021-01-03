@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="632.0" prefWidth="711.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.ControllerLogin">
+    <children>
+        <ImageView fitHeight="632.0" fitWidth="1124.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../resource/anh.jpg"/>
+            </image>
+        </ImageView>
+        <Button layoutX="600.0" layoutY="512.0" mnemonicParsing="false" onAction="#login" prefHeight="47.0"
+                prefWidth="128.0" text="Đăng nhập" textAlignment="CENTER">
+            <font>
+                <Font name="System Bold" size="16.0"/>
+            </font>
+        </Button>
+        <Label layoutX="304.0" layoutY="354.0" prefHeight="47.0" prefWidth="145.0" style="-fx-background-color: tan;"
+               text=" Tên đăng nhập:">
+            <font>
+                <Font name="Times New Roman Bold" size="18.0"/>
+            </font>
+        </Label>
+        <Label layoutX="304.0" layoutY="433.0" prefHeight="47.0" prefWidth="145.0" style="-fx-background-color: tan;"
+               text=" Mật khẩu:">
+            <font>
+                <Font name="Times New Roman Bold" size="18.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="acc" layoutX="507.0" layoutY="354.0" prefHeight="47.0" prefWidth="314.0"/>
+        <PasswordField fx:id="pass" layoutX="507.0" layoutY="433.0" prefHeight="47.0" prefWidth="314.0"/>
+        <Label alignment="CENTER" layoutX="279.0" layoutY="21.0" prefHeight="140.0" prefWidth="542.0" text="WELCOME"
+               textFill="#0026ff">
+            <font>
+                <Font name="Vladimir Script" size="96.0"/>
+            </font>
+        </Label>
+        <Label fx:id="wrong" alignment="CENTER" layoutX="507.0" layoutY="303.0" prefHeight="26.0" prefWidth="314.0"
+               text=" Sai tên đăng nhập hoặc mật khẩu, mời kiểm tra lại!" visible="false">
+            <font>
+                <Font name="System Bold" size="12.0"/>
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

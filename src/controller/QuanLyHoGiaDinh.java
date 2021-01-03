@@ -1,4 +1,6 @@
-package model;
+package controller;
+
+import model.HoGiaDinh;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

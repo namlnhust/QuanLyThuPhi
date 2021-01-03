@@ -8,9 +8,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller0">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller0">
     <children>
-        <TabPane layoutX="14.0" layoutY="14.0" prefHeight="1052.0" prefWidth="1892.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane fx:id="tabPane" layoutX="14.0" layoutY="14.0" prefHeight="1052.0" prefWidth="1892.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab text="Khoản phí">
                     <content>
@@ -66,7 +66,7 @@
                                         <Insets left="10.0" />
                                     </padding>
                                 </Label>
-                                <Button layoutX="71.0" layoutY="835.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="215.0" text="Hiển thị">
+                                <Button layoutX="71.0" layoutY="835.0" mnemonicParsing="false" onAction="#reloadKhoanPhiTable" prefHeight="53.0" prefWidth="215.0" text="reload">
                                     <font>
                                         <Font size="25.0" />
                                     </font>
@@ -112,6 +112,11 @@
                                     </padding>
                                 </Label>
                                 <TextField fx:id="txfLoaiPhi" layoutX="1206.0" layoutY="722.0" prefHeight="49.0" prefWidth="277.0" style="-fx-font-size: 1.5em" />
+                        <Label layoutX="39.0" layoutY="27.0" prefHeight="50.0" prefWidth="996.0" text="  Chú thích:      TP01: Thu phí bắt buộc, theo hộ gia đình           TP02: Thu phí bắt buộc, theo đầu người           DG: Đóng góp tự nguyện">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
                             </children>
                         </AnchorPane>
                     </content>
@@ -262,7 +267,7 @@
                                         <Insets left="10.0" />
                                     </padding>
                                 </Label>
-                                <Button layoutX="71.0" layoutY="835.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="215.0" text="Dọn">
+                                <Button layoutX="71.0" layoutY="835.0" mnemonicParsing="false" onAction="#reloadThuPhiHoGiaDinhTable" prefHeight="53.0" prefWidth="215.0" text="Reload">
                                     <font>
                                         <Font size="25.0" />
                                     </font>
@@ -299,12 +304,32 @@
                                         <Font size="20.0" />
                                     </font>
                                 </Button>
-                        <TextField fx:id="txfNopThem1" layoutX="1313.0" layoutY="663.0" prefHeight="49.0" prefWidth="277.0" style="-fx-font-size: 1.5em" />
-                        <Button layoutX="1625.0" layoutY="661.0" mnemonicParsing="false" onAction="#addNopThem" prefHeight="54.0" prefWidth="206.0" text="Nộp thêm">
+                                <TextField fx:id="txfNopThem1" layoutX="1313.0" layoutY="663.0" prefHeight="49.0" prefWidth="277.0" style="-fx-font-size: 1.5em" />
+                                <Button layoutX="1625.0" layoutY="661.0" mnemonicParsing="false" onAction="#addNopThem" prefHeight="54.0" prefWidth="206.0" text="Nộp thêm">
+                                    <font>
+                                        <Font size="25.0" />
+                                    </font>
+                                </Button>
+                        <Label layoutX="39.0" layoutY="27.0" prefHeight="50.0" prefWidth="996.0" text="  Chú thích:      TP01: Thu phí bắt buộc, theo hộ gia đình           TP02: Thu phí bắt buộc, theo đầu người           DG: Đóng góp tự nguyện">
                            <font>
-                              <Font size="25.0" />
+                              <Font name="System Bold" size="15.0" />
                            </font>
-                        </Button>
+                        </Label>
+                        <RadioButton fx:id="rdbTatCa" layoutX="1438.0" layoutY="587.0" mnemonicParsing="false" text="Tất cả">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </RadioButton>
+                        <RadioButton fx:id="rdbDaNop" layoutX="1583.0" layoutY="587.0" mnemonicParsing="false" text="Đã nộp">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </RadioButton>
+                        <RadioButton fx:id="rdbChuaNop" layoutX="1732.0" layoutY="587.0" mnemonicParsing="false" text="Chưa nộp">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </RadioButton>
                             </children>
                         </AnchorPane>
                     </content>

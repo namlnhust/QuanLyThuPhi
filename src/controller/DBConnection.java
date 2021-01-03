@@ -1,4 +1,4 @@
-package model;
+package controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,9 +11,9 @@ public class DBConnection {
     }
 
     public Connection getConnection() {
-        String URL = "jdbc:sqlserver://localhost:1433;databaseName=project_cnpm";
+        String URL = "jdbc:sqlserver://JARVIS:1433;databaseName=project_cnpm";
         String username = "sa";
-        String password = "powzxc2000@";
+        String password = "masteryi2K";
         try {
             this.connection = DriverManager.getConnection(URL, username, password);
         } catch (SQLException var5) {
