@@ -103,24 +103,24 @@ public class QuanLyThuPhiHoGiaDinh {
         Statement stm;
         String selQuery = "";
         String loaiPhi = "";
-        try {
-            stm = this.cnn.createStatement();
-            String qr = "select Loai_Phi from KhoanPhi where Ma_Phi='" + maPhi + "'";
-            ResultSet rs = stm.executeQuery(qr);
-            loaiPhi = rs.getString(0);
-            System.out.println("sout: " + loaiPhi);
-        } catch (SQLException sqlException) {
-        }
-//        loaiPhi = (String)getKhoanPhiInfor(maPhi).get("Loai_Phi");
+//        try {
+//            stm = this.cnn.createStatement();
+//            String qr = "select Loai_Phi from KhoanPhi where Ma_Phi='" + maPhi + "'";
+//            ResultSet rs = stm.executeQuery(qr);
+//            loaiPhi = rs.getString(0);
+//            System.out.println("sout: " + loaiPhi);
+//        } catch (SQLException sqlException) {
+//        }
+        loaiPhi = (String)getKhoanPhiInfor(maPhi).get("Loai_Phi");
         if (loaiPhi.equals("TP01")) {
             if (status.equals("DaNop")) {
-                selQuery = "select Thu_phi_ho_gia_dinh.Ma_ho, Thu_phi_ho_gia_dinh.Ma_Phi, So_tien_da_nop, " +
+                selQuery = "select Thu_phi_ho_gia_dinh.Ma_ho, So_tien_da_nop, " +
                         "Ngay_nop from ho_gia_dinh, Thu_phi_ho_gia_dinh, KhoanPhi where " +
                         "Thu_phi_ho_gia_dinh.Ma_ho=ho_gia_dinh.Ma_ho and Thu_phi_ho_gia_dinh.Ma_Phi=KhoanPhi.Ma_Phi " +
                         "and So_tien_da_nop= KhoanPhi.So_tien_can_thu and KhoanPhi.Loai_Phi='TP01' and " +
                         "Thu_phi_ho_gia_dinh.Ma_Phi='" + maPhi + "'";
             } else if (status.equals("ChuaNop")) {
-                selQuery = "select Thu_phi_ho_gia_dinh.Ma_ho, Thu_phi_ho_gia_dinh.Ma_Phi, So_tien_da_nop, " +
+                selQuery = "select Thu_phi_ho_gia_dinh.Ma_ho, So_tien_da_nop, " +
                         "Ngay_nop from ho_gia_dinh, Thu_phi_ho_gia_dinh, KhoanPhi " +
                         "where Thu_phi_ho_gia_dinh.Ma_ho= ho_gia_dinh.Ma_ho and Thu_phi_ho_gia_dinh.Ma_Phi= KhoanPhi.Ma_Phi " +
                         "and So_tien_da_nop< KhoanPhi.So_tien_can_thu and KhoanPhi.Loai_Phi='TP01' and " +
@@ -128,14 +128,14 @@ public class QuanLyThuPhiHoGiaDinh {
             }
         } else if (loaiPhi.equals("TP02")) {
             if (status.equals("DaNop")) {
-                selQuery = "select Thu_phi_ho_gia_dinh.Ma_ho, Thu_phi_ho_gia_dinh.Ma_Phi, So_tien_da_nop, " +
+                selQuery = "select Thu_phi_ho_gia_dinh.Ma_ho, So_tien_da_nop, " +
                         "Ngay_nop from ho_gia_dinh, Thu_phi_ho_gia_dinh, KhoanPhi " +
                         "where Thu_phi_ho_gia_dinh.Ma_ho= ho_gia_dinh.Ma_ho and " +
                         "Thu_phi_ho_gia_dinh.Ma_Phi=KhoanPhi.Ma_Phi " +
                         "and So_tien_da_nop=KhoanPhi.So_tien_can_thu*ho_gia_dinh.So_nhan_khau and KhoanPhi.Loai_Phi='TP02'" +
                         "and Thu_phi_ho_gia_dinh.Ma_Phi='" + maPhi + "'";
             } else if (status.equals("ChuaNop")) {
-                selQuery = "select Thu_phi_ho_gia_dinh.Ma_ho, Thu_phi_ho_gia_dinh.Ma_Phi, So_tien_da_nop, " +
+                selQuery = "select Thu_phi_ho_gia_dinh.Ma_ho, So_tien_da_nop, " +
                         "Ngay_nop from ho_gia_dinh, Thu_phi_ho_gia_dinh, KhoanPhi " +
                         "where Thu_phi_ho_gia_dinh.Ma_ho= ho_gia_dinh.Ma_ho and " +
                         "Thu_phi_ho_gia_dinh.Ma_Phi= KhoanPhi.Ma_Phi " +
@@ -143,21 +143,26 @@ public class QuanLyThuPhiHoGiaDinh {
                         "and Thu_phi_ho_gia_dinh.Ma_Phi='" + maPhi + "'";
             }
         } else {
-            selQuery = "select Thu_phi_ho_gia_dinh.Ma_ho, Thu_phi_ho_gia_dinh.Ma_Phi, So_tien_da_nop, Ngay_nop from ho_gia_dinh, " +
+            selQuery = "select Thu_phi_ho_gia_dinh.Ma_ho, So_tien_da_nop, Ngay_nop from ho_gia_dinh, " +
                     "Thu_phi_ho_gia_dinh, KhoanPhi " +
                     "where Thu_phi_ho_gia_dinh.Ma_ho= ho_gia_dinh.Ma_ho and Thu_phi_ho_gia_dinh.Ma_Phi= KhoanPhi.Ma_Phi " +
                     "and KhoanPhi.Loai_Phi='DG00'" + " and Thu_phi_ho_gia_dinh.Ma_Phi='" + maPhi + "'";
         }
         try {
+            System.out.println(selQuery);
             stm = this.cnn.createStatement();
             ResultSet resultSet = stm.executeQuery(selQuery);
             if (status.equals("ChuaNop")) {
                 if (loaiPhi.equals("TP01")) {
-                    ResultSet resultSet1 = stm.executeQuery("select ho_gia_dinh.Ma_ho from ho_gia_dinh " +
+                    Statement stm1 = this.cnn.createStatement();
+                    ResultSet resultSet1 = stm1.executeQuery("select ho_gia_dinh.Ma_ho from ho_gia_dinh " +
+                            "where ho_gia_dinh.Ma_ho not in (select distinct Ma_ho from Thu_phi_ho_gia_dinh where " +
+                            "Thu_phi_ho_gia_dinh.Ma_Phi='" + maPhi + "')");
+                    System.out.println("select ho_gia_dinh.Ma_ho from ho_gia_dinh " +
                             "where ho_gia_dinh.Ma_ho not in (select distinct Ma_ho from Thu_phi_ho_gia_dinh where " +
                             "Thu_phi_ho_gia_dinh.Ma_Phi='" + maPhi + "')");
                     while (resultSet1.next()) {
-                        String maHoGiaDinh = resultSet.getString("Ma_ho");
+                        String maHoGiaDinh = resultSet1.getString("Ma_ho");
                         Integer soTienDaNop = 0;
                         Integer soTienConThieu = (int)getKhoanPhiInfor(maPhi).get("So_tien_can_thu");
                         LocalDate ngayNop = LocalDate.now();
@@ -175,11 +180,16 @@ public class QuanLyThuPhiHoGiaDinh {
 
                 }
                 else if (loaiPhi.equals("TP02")) {
-                    ResultSet resultSet1 = stm.executeQuery("select ho_gia_dinh.Ma_ho from ho_gia_dinh " +
+                    Statement stm1 = this.cnn.createStatement();
+                    ResultSet resultSet1 = stm1.executeQuery("select ho_gia_dinh.Ma_ho from ho_gia_dinh " +
+                            "where ho_gia_dinh.Ma_ho not in (select distinct Ma_ho from Thu_phi_ho_gia_dinh where " +
+                            "Thu_phi_ho_gia_dinh.Ma_Phi='" + maPhi + "')");
+                    System.out.println("select ho_gia_dinh.Ma_ho from ho_gia_dinh " +
                             "where ho_gia_dinh.Ma_ho not in (select distinct Ma_ho from Thu_phi_ho_gia_dinh where " +
                             "Thu_phi_ho_gia_dinh.Ma_Phi='" + maPhi + "')");
                     while (resultSet1.next()) {
-                        String maHoGiaDinh = resultSet.getString("Ma_ho");
+                        String maHoGiaDinh = resultSet1.getString("Ma_ho");
+                        System.out.println(maHoGiaDinh);
                         Integer soTienDaNop = 0;
                         Integer soTienConThieu = (int)getKhoanPhiInfor(maPhi).get("So_tien_can_thu")
                                 * quanLyHoGiaDinh.getHoGiaDinh(maHoGiaDinh).getSoNhanKhau();
