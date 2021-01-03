@@ -843,14 +843,15 @@ public class Controller0 implements Initializable {
 			}
 		});
 
-		tableViewKhoanPhi.setOnMousePressed(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
-					setMaPhiToShow(tableViewThuPhiHoGiaDinh.getSelectionModel().getSelectedItem().getMaPhi());
+		tableViewKhoanPhi.setRowFactory( tv -> {
+			TableRow<KhoanPhi> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+					setMaPhiToShow(row.getItem().getMaPhi());
 					showByKhoanPhi(maPhiToShow, statusToShow);
 				}
-			}
+			});
+			return row ;
 		});
 
 		Iterator var4;

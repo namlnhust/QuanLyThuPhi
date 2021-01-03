@@ -320,12 +320,12 @@
                               <Font size="18.0" />
                            </font>
                         </RadioButton>
-                        <RadioButton fx:id="rdbDaNop" layoutX="1583.0" layoutY="587.0" mnemonicParsing="false" text="Đã nộp">
+                        <RadioButton fx:id="rdbDaNop" layoutX="1584.0" layoutY="587.0" mnemonicParsing="false" text="Đã nộp đủ">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </RadioButton>
-                        <RadioButton fx:id="rdbChuaNop" layoutX="1732.0" layoutY="587.0" mnemonicParsing="false" text="Chưa nộp">
+                        <RadioButton fx:id="rdbChuaNop" layoutX="1765.0" layoutY="587.0" mnemonicParsing="false" text="Còn thiếu">
                            <font>
                               <Font size="18.0" />
                            </font>
