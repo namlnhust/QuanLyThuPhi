@@ -116,8 +116,6 @@ public class Controller0 implements Initializable {
 	@FXML
 	private TextField txfNopThem1 = new TextField();
 	@FXML
-	private RadioButton rdbTatCa = new RadioButton();
-	@FXML
 	private RadioButton rdbDaNop = new RadioButton();
 	@FXML
 	private RadioButton rdbChuaNop = new RadioButton();
@@ -794,11 +792,11 @@ public class Controller0 implements Initializable {
 	public void showByKhoanPhi(String maPhi, String status) {
 		ObservableList<ThuPhiHoGiaDinh> showingList = FXCollections.observableArrayList(quanLyThuPhiHoGiaDinh.showByKhoanPhi(maPhi, status));
 		tableViewThuPhiHoGiaDinh.setItems(showingList);
-		tabPane.getSelectionModel().select(3);
+		tabPane.getSelectionModel().select(2);
 	}
 
 	String maPhiToShow = "";
-	String statusToShow = "TatCa";
+	String statusToShow = "";
 
 	public void setMaPhiToShow(String maPhiToShow) {
 		this.maPhiToShow = maPhiToShow;
@@ -824,8 +822,6 @@ public class Controller0 implements Initializable {
 		getSelectedKhoanPhi();
 
 		ToggleGroup group = new ToggleGroup();
-		rdbTatCa.setToggleGroup(group);
-		rdbTatCa.setSelected(true);
 		rdbDaNop.setToggleGroup(group);
 		rdbChuaNop.setToggleGroup(group);
 
