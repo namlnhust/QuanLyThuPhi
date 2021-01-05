@@ -1,0 +1,47 @@
+<component name="libraryTable">
+  <library name="antlr-runtime-3.5.2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/antlr-runtime-3.5.2.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/antlr4-4.7.1.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/antlr4-runtime-4.7.1.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/bigproject-model-serialization-2020-06-05-09-19-36.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/BigProject-parser-2020-06-05-09-19-36.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/BigProject-plugin-2020-06-05-09-19-36.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/codeiris-git-model-2020-06-05-09-19-36.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/codeiris-graph-model-2020-06-05-09-19-36.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/CodeIris-Idea-2020-06-05-09-19-36.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/codeiris-import-api-2020-06-05-09-19-36.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/codeiris-model-algorithms-2020-06-05-09-19-36.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/codeiris-model-repository-2020-06-05-09-19-36.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/codeiris-plugin-model-2020-06-05-09-19-36.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/codeiris-plugin-model-creator-2020-06-05-09-19-36.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/codeiris-web-model-2020-06-05-09-19-36.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/commons-io-2.4.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/commons-logging-1.2.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/gpars-1.2.1.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/groovy-all-2.4.17.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/icu4j-58.2.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/jackson-core-2.2.3.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/jackson-core-asl-1.9.13.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/jackson-mapper-asl-1.9.13.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/javax.json-1.0.4.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/jcl-over-slf4j-1.7.24.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/joda-time-2.5.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/jsr166y-1.7.0.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/log4j-1.2.17.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/multiverse-core-0.7.0.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/org.abego.treelayout.core-1.0.3.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/paranamer-2.2.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/picocontainer-1.2.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/prefuse-1.0.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/slf4j-api-1.7.24.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/spring-beans-4.3.7.RELEASE.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/spring-core-4.3.7.RELEASE.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/spring-data-commons-1.13.1.RELEASE.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/ST4-4.0.8.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/CodeIris/lib/xml-apis-1.0.b2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

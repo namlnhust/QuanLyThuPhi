@@ -22,10 +22,6 @@ public class QuanLyThuPhiHoGiaDinh {
         this.cnn = this.dbConnection.getConnection();
     }
 
-    public ArrayList<ThuPhiHoGiaDinh> getThuthuPhiHoGiaDinhList() throws SQLException {
-        return selectThuPhiHoGiaDinh();
-    }
-
     public ArrayList<ThuPhiHoGiaDinh> selectThuPhiHoGiaDinh() throws SQLException {
         Statement stm = this.cnn.createStatement();
         String selQuery = "SELECT * FROM Thu_phi_ho_gia_dinh";
@@ -71,8 +67,7 @@ public class QuanLyThuPhiHoGiaDinh {
         }
     }
 
-    public boolean deleteThuPhiHoGiaDinh(ThuPhiHoGiaDinh tmp) {
-        try {
+    public boolean deleteThuPhiHoGiaDinh(ThuPhiHoGiaDinh tmp) {        try {
             Statement stm = this.cnn.createStatement();
             String selQuery = "delete from Thu_phi_ho_gia_dinh where Ma_ho='" + tmp.getMaHoGiaDinh() + "' and Ma_Phi='"
                     + tmp.getMaPhi() + "'";

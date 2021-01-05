@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -19,7 +20,7 @@
                                 <Label layoutX="693.0" layoutY="604.0" prefHeight="49.0" prefWidth="139.0"
                                        style="-fx-background-color: red;" text="Tên phí">
                                     <font>
-                                        <Font size="18.0"/>
+                                        <Font name="System Bold" size="18.0"/>
                                     </font>
                                     <padding>
                                         <Insets left="10.0"/>
@@ -32,7 +33,7 @@
                                 <Label layoutX="38.0" layoutY="604.0" prefHeight="49.0" prefWidth="139.0"
                                        style="-fx-background-color: red;" text="Mã phí">
                                     <font>
-                                        <Font size="18.0"/>
+                                        <Font name="System Bold" size="18.0"/>
                                     </font>
                                     <padding>
                                         <Insets left="10.0"/>
@@ -67,7 +68,7 @@
                                 <Label layoutX="1338.0" layoutY="604.0" prefHeight="49.0" prefWidth="139.0"
                                        style="-fx-background-color: red;" text="Số tiền cần thu">
                                     <font>
-                                        <Font size="18.0"/>
+                                        <Font name="System Bold" size="18.0"/>
                                     </font>
                                     <padding>
                                         <Insets left="10.0"/>
@@ -76,7 +77,7 @@
                                 <Label layoutX="349.0" layoutY="722.0" prefHeight="49.0" prefWidth="139.0"
                                        style="-fx-background-color: red;" text="Hạn nộp">
                                     <font>
-                                        <Font size="18.0"/>
+                                        <Font name="System Bold" size="18.0"/>
                                     </font>
                                     <padding>
                                         <Insets left="10.0"/>
@@ -84,7 +85,7 @@
                                 </Label>
                                 <Button layoutX="71.0" layoutY="835.0" mnemonicParsing="false"
                                         onAction="#reloadKhoanPhiTable" prefHeight="53.0" prefWidth="215.0"
-                                        text="reload">
+                                        text="Reload">
                                     <font>
                                         <Font size="25.0"/>
                                     </font>
@@ -119,7 +120,7 @@
                                        prefWidth="239.0" style="-fx-background-color: f0b022;"
                                        text="Nhập từ khóa tìm kiếm:" textAlignment="CENTER">
                                     <font>
-                                        <Font size="20.0"/>
+                                        <Font name="System Bold" size="18.0"/>
                                     </font>
                                 </Label>
                                 <TextField fx:id="khoanPhiKeyword" layoutX="1338.0" layoutY="26.0" prefHeight="51.0"
@@ -134,7 +135,7 @@
                                 <Label layoutX="1018.0" layoutY="722.0" prefHeight="49.0" prefWidth="139.0"
                                        style="-fx-background-color: red;" text="Loại phí">
                                     <font>
-                                        <Font size="18.0"/>
+                                        <Font name="System Bold" size="18.0"/>
                                     </font>
                                     <padding>
                                         <Insets left="10.0"/>
@@ -175,7 +176,7 @@
                                 <Label layoutX="55.0" layoutY="604.0" prefHeight="49.0" prefWidth="139.0"
                                        style="-fx-background-color: red;" text="Mã hộ gia đình">
                                     <font>
-                                        <Font size="18.0"/>
+                                        <Font name="System Bold" size="18.0"/>
                                     </font>
                                     <padding>
                                         <Insets left="10.0"/>
@@ -184,7 +185,7 @@
                                 <Label layoutX="691.0" layoutY="604.0" prefHeight="49.0" prefWidth="139.0"
                                        style="-fx-background-color: red;" text="Tên chủ hộ">
                                     <font>
-                                        <Font size="18.0"/>
+                                        <Font name="System Bold" size="18.0"/>
                                     </font>
                                     <padding>
                                         <Insets left="10.0"/>
@@ -197,7 +198,7 @@
                                 <Label layoutX="1361.0" layoutY="604.0" prefHeight="49.0" prefWidth="139.0"
                                        style="-fx-background-color: red;" text="Địa chỉ">
                                     <font>
-                                        <Font size="18.0"/>
+                                        <Font name="System Bold" size="18.0"/>
                                     </font>
                                     <padding>
                                         <Insets left="10.0"/>
@@ -206,7 +207,7 @@
                                 <Label layoutX="349.0" layoutY="722.0" prefHeight="49.0" prefWidth="139.0"
                                        style="-fx-background-color: red;" text="Số điện thoại">
                                     <font>
-                                        <Font size="18.0"/>
+                                        <Font name="System Bold" size="18.0"/>
                                     </font>
                                     <padding>
                                         <Insets left="10.0"/>
@@ -219,37 +220,31 @@
                                 <Label layoutX="1018.0" layoutY="722.0" prefHeight="49.0" prefWidth="139.0"
                                        style="-fx-background-color: red;" text="Số nhân khẩu">
                                     <font>
-                                        <Font size="18.0"/>
+                                        <Font name="System Bold" size="18.0"/>
                                     </font>
                                     <padding>
                                         <Insets left="10.0"/>
                                     </padding>
                                 </Label>
-                                <Button layoutX="87.0" layoutY="835.0" mnemonicParsing="false" prefHeight="53.0"
-                                        prefWidth="215.0" text="Hiển thị">
-                                    <font>
-                                        <Font size="25.0"/>
-                                    </font>
-                                </Button>
-                                <Button layoutX="460.0" layoutY="835.0" mnemonicParsing="false"
+                                <Button layoutX="212.0" layoutY="835.0" mnemonicParsing="false"
                                         onAction="#themHoGiaDinh" prefHeight="53.0" prefWidth="215.0" text="Thêm">
                                     <font>
                                         <Font size="25.0"/>
                                     </font>
                                 </Button>
-                                <Button layoutX="848.0" layoutY="835.0" mnemonicParsing="false"
+                                <Button layoutX="639.0" layoutY="835.0" mnemonicParsing="false"
                                         onAction="#deleteHoGiaDinh" prefHeight="53.0" prefWidth="215.0" text="Xóa">
                                     <font>
                                         <Font size="25.0"/>
                                     </font>
                                 </Button>
-                                <Button layoutX="1215.0" layoutY="835.0" mnemonicParsing="false"
+                                <Button layoutX="1066.0" layoutY="835.0" mnemonicParsing="false"
                                         onAction="#updateHoGiaDinh" prefHeight="53.0" prefWidth="215.0" text="Sửa">
                                     <font>
                                         <Font size="25.0"/>
                                     </font>
                                 </Button>
-                                <Button layoutX="1579.0" layoutY="835.0" mnemonicParsing="false"
+                                <Button layoutX="1493.0" layoutY="835.0" mnemonicParsing="false"
                                         onAction="#cancelHoGiaDinh" prefHeight="53.0" prefWidth="215.0" text="Hủy">
                                     <font>
                                         <Font size="25.0"/>
@@ -259,7 +254,7 @@
                                        prefWidth="239.0" style="-fx-background-color: f0b022;"
                                        text="Nhập từ khóa tìm kiếm:" textAlignment="CENTER">
                                     <font>
-                                        <Font size="20.0"/>
+                                        <Font name="System Bold" size="18.0"/>
                                     </font>
                                 </Label>
                                 <TextField fx:id="hoGiaDinhKeyword" layoutX="1338.0" layoutY="26.0" prefHeight="51.0"
@@ -282,7 +277,7 @@
                                 <Label layoutX="693.0" layoutY="604.0" prefHeight="49.0" prefWidth="139.0"
                                        style="-fx-background-color: red;" text="Mã phí">
                                     <font>
-                                        <Font size="18.0"/>
+                                        <Font name="System Bold" size="18.0"/>
                                     </font>
                                     <padding>
                                         <Insets left="10.0"/>
@@ -295,7 +290,7 @@
                                 <Label layoutX="34.0" layoutY="604.0" prefHeight="49.0" prefWidth="180.0"
                                        style="-fx-background-color: red;" text="Mã hộ gia đình">
                                     <font>
-                                        <Font size="18.0"/>
+                                        <Font name="System Bold" size="18.0"/>
                                     </font>
                                     <padding>
                                         <Insets left="10.0"/>
@@ -320,7 +315,7 @@
                                 <Label layoutX="695.0" layoutY="722.0" prefHeight="49.0" prefWidth="139.0"
                                        style="-fx-background-color: red;" text="Số tiền đã nộp">
                                     <font>
-                                        <Font size="18.0"/>
+                                        <Font name="System Bold" size="18.0"/>
                                     </font>
                                     <padding>
                                         <Insets left="10.0"/>
@@ -329,7 +324,7 @@
                                 <Label layoutX="32.0" layoutY="722.0" prefHeight="49.0" prefWidth="184.0"
                                        style="-fx-background-color: red;" text="Ngày sửa cuối cùng">
                                     <font>
-                                        <Font size="18.0"/>
+                                        <Font name="System Bold" size="18.0"/>
                                     </font>
                                     <padding>
                                         <Insets left="10.0"/>
@@ -375,7 +370,7 @@
                                        prefWidth="239.0" style="-fx-background-color: f0b022;"
                                        text="Nhập từ khóa tìm kiếm:" textAlignment="CENTER">
                                     <font>
-                                        <Font size="20.0"/>
+                                        <Font name="System Bold" size="18.0"/>
                                     </font>
                                 </Label>
                                 <TextField fx:id="thuPhiHoGiaDinhKeyword" layoutX="1338.0" layoutY="26.0"

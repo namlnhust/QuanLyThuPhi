@@ -31,7 +31,8 @@
                 <Font name="Times New Roman Bold" size="18.0"/>
             </font>
         </Label>
-        <TextField fx:id="acc" layoutX="507.0" layoutY="354.0" prefHeight="47.0" prefWidth="314.0"/>
+        <TextField fx:id="acc" layoutX="507.0" layoutY="354.0" prefHeight="47.0" prefWidth="314.0"
+                   style="-fx-font-size: 1.5em"/>
         <PasswordField fx:id="pass" layoutX="507.0" layoutY="433.0" prefHeight="47.0" prefWidth="314.0"/>
         <Label alignment="CENTER" layoutX="279.0" layoutY="21.0" prefHeight="140.0" prefWidth="542.0" text="WELCOME"
                textFill="#0026ff">
